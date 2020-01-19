@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+/* Responsive Styles */
+@media screen and (max-width: 767px) {
+
+}
+
+@media screen and (max-width: 575px) {
+
+}
+
+*{
+  font-family: 'Varela Round', sans-serif;
+}
+
+.content{
+  padding:50px
+}
+
+/* NAVBAR STYLE */
+.navbar-toggler{
+  border: none !important;
+}
+
+.navbar-collapse{
+  margin-left:25px !important;
+  height: 250px !important;
+  padding-top: 15px;
+}
+
+/* ROW STYLE */
+.row{
+  margin-left: 0 !important;
+}

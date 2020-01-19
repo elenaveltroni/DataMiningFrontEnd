@@ -1,0 +1,28 @@
+<div>
+  <div style="width: 100%; display: inline-flex; margin-top: 10px; border-bottom: solid #dcdcdc 1px; height: 40px;">
+    <div class="menuBox" [class.selectedBox]="tab==1" (click)="changeTabParam(1)">
+      Insert text
+    </div>
+    <div class="menuBox" [class.selectedBox]="tab==2" (click)="changeTabParam(2)">
+      Insert URL
+    </div>
+  </div>
+
+  <div *ngIf="tab == 1" style="margin-top:20px;">
+    <textarea type="text" rows="15" id="formText" class="md-textarea form-control" mdbInput placeholder="Enter the text to analyze" [(ngModel)]="text"></textarea>
+    <div>
+      <textarea type="text" rows="1" id="slitChar" class="md-textarea form-control textSplitCharacter" mdbInput placeholder="Enter the split character" [(ngModel)]="splitCharacter"></textarea>
+      <div style="float:right">
+        <button type="button" mdbBtn color="info" mdbWavesEffect (click)="splitByDot()">Slit by dot</button>
+        <button type="button" mdbBtn color="info" mdbWavesEffect (click)="splitByCharacter()">Enter a character to make the split</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="tab == 2" style="margin-top:20px;">
+    <textarea type="text" rows="1" id="formUrl" class="md-textarea form-control" mdbInput placeholder="Enter the url of the text to be analyzed" [(ngModel)]="urlToSplit"></textarea>
+    <div style="float:right">
+      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="getText()">Split</button>
+    </div>
+  </div>
+</div>

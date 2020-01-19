@@ -1,0 +1,7 @@
+.border{
+  border: solid 2px #0099CC !important;
+  border-radius: 10px;
+  background-color: white;
+  padding:5px;
+  margin-top:-15px;
+}

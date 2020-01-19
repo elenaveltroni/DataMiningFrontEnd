@@ -1,0 +1,29 @@
+.menuBox{
+  width: 50%;
+  text-align: center;
+  opacity: 0.4;
+  cursor: pointer;
+  position: relative;
+  padding: 8px;
+}
+
+.menuBox div{
+  font-size: 12pt;
+  font-weight: 700;
+}
+
+.selectedBox{
+  color: #0099CC !important;
+  font-weight: bold;
+  opacity: 1;
+  background-color: #dcdcdc;
+  border-radius: 3px;
+}
+
+.textSplitCharacter{
+  margin-top: 10px;
+  border-bottom: solid #dcdcdc 1px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}

@@ -1,0 +1,40 @@
+<h3>Create new acquisition</h3>
+<div class="md-form">
+  <textarea rows="1" type="text" id="acquirorName" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorName"></textarea>
+  <label for="acquirorName">Acquiror Name</label>
+</div>
+<div class="md-form">
+  <textarea rows="1" type="text" id="acquirorTicker" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorTicker"></textarea>
+  <label for="acquirorTicker">Acquiror Ticker</label>
+</div>
+<div class="md-form">
+  <textarea rows="1" type="text" id="acquirorState" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorState"></textarea>
+  <label for="acquirorState">Acquiror State</label>
+</div>
+<div class="md-form">
+  <textarea rows="1" type="text" id="targetName" class="md-textarea form-control" mdbInput [(ngModel)]="targetName"></textarea>
+  <label for="targetName">Target Name</label>
+</div>
+<div class="md-form">
+  <textarea rows="1" type="text" id="targetTicker" class="md-textarea form-control" mdbInput [(ngModel)]="targetTicker"></textarea>
+  <label for="targetTicker">Target Ticker</label>
+</div>
+<div class="md-form">
+  <textarea rows="1" type="text" id="targetState" class="md-textarea form-control" mdbInput [(ngModel)]="targetState"></textarea>
+  <label for="targetState">Target State</label>
+</div>
+<div class="md-form">
+  <textarea rows="1" type="text" id="announcementDate" class="md-textarea form-control" mdbInput [(ngModel)]="announcementDate"></textarea>
+  <label for="announcementDate">Announcement Date</label>
+</div>
+<div class="md-form">
+  <label>Status of the operation</label><br><br>
+  <select class="browser-default custom-select" [(ngModel)]="status">
+    <option value="IN_PROGRESS">In progress</option>
+    <option value="COMPLETE">Complete</option>
+  </select>
+</div>
+
+<div style="float:right">
+  <button type="button" mdbBtn color="info" mdbWavesEffect (click)="save()" [disabled]="allFormFilled()">Save</button>
+</div>

@@ -1,0 +1,52 @@
+<div style="width:100%; display: inline-flex">
+  <h3 style="width:100%">Keyword list</h3>
+
+  <button *ngIf="!addKeyword" style="float:right" (click)="addKeyword = !addKeyword" type="button" mdbBtn color="info" outline="true" rounded="true" size="sm" class="px-2" mdbWavesEffect>
+    <mdb-icon fas icon="plus" class="mt-0"></mdb-icon>
+  </button>
+
+  <button *ngIf="addKeyword" style="float:right" (click)="addKeyword = !addKeyword" type="button" mdbBtn color="info" outline="true" rounded="true" size="sm" class="px-2" mdbWavesEffect>
+    <mdb-icon fas icon="minus" class="mt-0"></mdb-icon>
+  </button>
+</div>
+
+<div *ngIf="addKeyword" style="height: 190px;">
+  <div class="md-form">
+    <textarea rows="1" type="text" id="newKeyword" class="md-textarea form-control" mdbInput [(ngModel)]="newKeyword"></textarea>
+    <label for="newKeyword">Add new keyword</label>
+  </div>
+
+  <div style="float:right">
+    <button type="button" mdbBtn color="info" mdbWavesEffect (click)="addNewKeyword()" [disabled]="false">Add</button>
+  </div>
+</div>
+
+<div class="sectionContainer animated fadeIn">
+  <div class="sectionBody">
+      <table mdbTable #tableEl="mdbTable" hover="true" class="table z-depth-0">
+        <thead class="sticky-top">
+        <tr>
+          <th>
+          </th>
+          <th>
+          </th>
+        </tr>
+        </thead>
+        <tbody #row>
+        <tr *ngIf="keywordList.length==0">
+          <td colspan="2">No keyword</td>
+        </tr>
+        <tr *ngFor="let key of keywordList; let i = index">
+          <td style="width:88%">
+            {{key.keyword}}
+          </td>
+          <td style="text-align: left;">
+            <button style="width: 31px;" type="button" mdbBtn color="danger" outline="true" rounded="true" size="sm" class="px-2" mdbWavesEffect (click)="deleteKeyword(key.keyword)">
+              <mdb-icon fas icon="times" class="mt-0"></mdb-icon>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
