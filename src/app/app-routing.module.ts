@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {CreateAcquisitionComponent} from './create-acquisition/create-acquisition.component';
+import {KeywordComponent} from './keyword/keyword.component';
 
 const appRoutes: Routes = [
   {
@@ -11,6 +12,10 @@ const appRoutes: Routes = [
   {
     path: 'create-acquisition',
     component: CreateAcquisitionComponent
+  },
+  {
+    path: 'keyword',
+    component: KeywordComponent
   },
   {
     path: '',

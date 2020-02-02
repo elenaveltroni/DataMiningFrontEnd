@@ -4,7 +4,7 @@
       Insert text
     </div>
     <div class="menuBox" [class.selectedBox]="tab==2" (click)="changeTabParam(2)">
-      Insert URL
+      Search Twitter
     </div>
   </div>
 
@@ -20,9 +20,9 @@
   </div>
 
   <div *ngIf="tab == 2" style="margin-top:20px;">
-    <textarea type="text" rows="1" id="formUrl" class="md-textarea form-control" mdbInput placeholder="Enter the url of the text to be analyzed" [(ngModel)]="urlToSplit"></textarea>
+    <textarea type="text" rows="1" id="formUrl" class="md-textarea form-control" mdbInput placeholder="Enter a keyword to search for on twitter" [(ngModel)]="twitter"></textarea>
     <div style="float:right">
-      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="getText()">Split</button>
+      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="searchTwitter()">Search</button>
     </div>
   </div>
 </div>

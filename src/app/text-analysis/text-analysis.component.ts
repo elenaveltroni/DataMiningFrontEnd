@@ -9,7 +9,7 @@ export class TextAnalysisComponent implements OnInit {
   tab: number = 0;
   text: string = '';
   splitCharacter: string = '';
-  urlToSplit = '';
+  twitter = '';
 
   constructor() { }
 
@@ -35,7 +35,7 @@ export class TextAnalysisComponent implements OnInit {
     console.log(arraySplit);
   }
 
-  getText(){
+  searchTwitter(){
 
   }
 
