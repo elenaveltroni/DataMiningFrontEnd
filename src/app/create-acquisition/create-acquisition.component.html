@@ -19,27 +19,33 @@
     <div *ngIf="accordion1" id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
       <div class="card-body">
         <div class="md-form">
-          <textarea rows="1" type="text" id="acquirorName" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorName"></textarea>
+          <input type="text" id="acquirorName" class="form-control" [(ngModel)]="acquirorName" mdbInput>
+          <!--<textarea rows="1" type="text" id="acquirorName" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorName"></textarea>-->
           <label for="acquirorName">Acquiror Name</label>
         </div>
         <div class="md-form">
-          <textarea rows="1" type="text" id="acquirorTicker" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorTicker"></textarea>
+          <input type="text" id="acquirorTicker" class="form-control" [(ngModel)]="acquirorTicker" mdbInput>
+          <!--<textarea rows="1" type="text" id="acquirorTicker" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorTicker"></textarea>-->
           <label for="acquirorTicker">Acquiror Ticker</label>
         </div>
         <div class="md-form">
-          <textarea rows="1" type="text" id="acquirorState" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorState"></textarea>
+          <input type="text" id="acquirorState" class="form-control" [(ngModel)]="acquirorState" mdbInput>
+          <!--<textarea rows="1" type="text" id="acquirorState" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorState"></textarea>-->
           <label for="acquirorState">Acquiror State</label>
         </div>
         <div class="md-form">
-          <textarea rows="1" type="text" id="targetName" class="md-textarea form-control" mdbInput [(ngModel)]="targetName"></textarea>
+          <input type="text" id="targetName" class="form-control" [(ngModel)]="targetName" mdbInput>
+          <!--<textarea rows="1" type="text" id="targetName" class="md-textarea form-control" mdbInput [(ngModel)]="targetName"></textarea>-->
           <label for="targetName">Target Name</label>
         </div>
         <div class="md-form">
-          <textarea rows="1" type="text" id="targetTicker" class="md-textarea form-control" mdbInput [(ngModel)]="targetTicker"></textarea>
+          <input type="text" id="targetTicker" class="form-control" [(ngModel)]="targetTicker" mdbInput>
+          <!--<textarea rows="1" type="text" id="targetTicker" class="md-textarea form-control" mdbInput [(ngModel)]="targetTicker"></textarea>-->
           <label for="targetTicker">Target Ticker</label>
         </div>
         <div class="md-form">
-          <textarea rows="1" type="text" id="targetState" class="md-textarea form-control" mdbInput [(ngModel)]="targetState"></textarea>
+          <input type="text" id="targetState" class="form-control" [(ngModel)]="targetState" mdbInput>
+          <!--<textarea rows="1" type="text" id="targetState" class="md-textarea form-control" mdbInput [(ngModel)]="targetState"></textarea>-->
           <label for="targetState">Target State</label>
         </div>
         <div class="md-form">
@@ -75,18 +81,24 @@
     <div *ngIf="accordion2" id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body">
         <div class="md-form">
+          <label>Acquisitions</label><br><br>
           <select class="browser-default custom-select" [(ngModel)]="selected_acquisition" style="margin-bottom: 15px;" id="documents">
             <option *ngFor="let acq of acquisitions" value="{{acq._id.$oid}}">{{acq.acquiror.name}} - {{acq.target.name}}</option>
             <option *ngIf="acquisitions.length == 0" value="undefined">No document</option>
           </select>
-          <label for="documents">Documents</label>
         </div>
         <div class="md-form">
-          <textarea rows="1" id="documentLink" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="documentLink"></textarea>
+          <input type="text" id="documentTitle" class="form-control" [(ngModel)]="documentTitle" mdbInput>
+          <label for="documentTitle">Title</label>
+        </div>
+        <div class="md-form">
+          <input type="text" id="documentLink" class="form-control" [(ngModel)]="documentLink" mdbInput>
+          <!--<textarea rows="1" id="documentLink" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="documentLink"></textarea>-->
           <label for="documentLink">Link</label>
         </div>
         <div class="md-form">
-          <textarea rows="1" id="documentSource" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="documentSource"></textarea>
+          <input type="text" id="documentSource" class="form-control" [(ngModel)]="documentSource" mdbInput>
+          <!--<textarea rows="1" id="documentSource" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="documentSource"></textarea>-->
           <label for="acquirorState">Source</label>
         </div>
         <div class="md-form">
@@ -94,7 +106,8 @@
           <label for="date">Date</label>
         </div>
         <div class="md-form">
-          <textarea rows="1" id="documentType" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="documentType"></textarea>
+          <input type="text" id="documentType" class="form-control" [(ngModel)]="documentType" mdbInput>
+          <!--<textarea rows="1" id="documentType" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="documentType"></textarea>-->
           <label for="documentType">Type</label>
         </div>
       </div>
@@ -115,21 +128,25 @@
     <div *ngIf="accordion3" id="collapseTree" class="collapse show" aria-labelledby="headingTree" data-parent="#accordionExample">
       <div class="card-body">
         <div class="md-form">
+          <label>Documents</label><br><br>
           <select class="browser-default custom-select" [(ngModel)]="selected_doc" style="margin-bottom: 15px;">
             <option *ngFor="let doc of documents" value="{{doc._id.$oid}}">{{doc.source}}</option>
             <option *ngIf="documents.length == 0" value="undefined">No document</option>
           </select>
         </div>
         <div class="md-form">
-          <textarea rows="1" id="text" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="text"></textarea>
+          <input type="text" id="text" class="form-control" [(ngModel)]="text" mdbInput>
+          <!--<textarea rows="1" id="text" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="text"></textarea>-->
           <label for="text">Text</label>
         </div>
         <div class="md-form">
-          <textarea rows="1" id="class" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="class"></textarea>
+          <input type="text" id="class" class="form-control" [(ngModel)]="class" mdbInput>
+          <!--<textarea rows="1" id="class" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="class"></textarea>-->
           <label for="class">Class</label>
         </div>
         <div class="md-form">
-          <textarea rows="1" id="type" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="type"></textarea>
+          <input type="text" id="type" class="form-control" [(ngModel)]="type" mdbInput>
+          <!--<textarea rows="1" id="type" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="type"></textarea>-->
           <label for="type">Type</label>
         </div>
       </div>

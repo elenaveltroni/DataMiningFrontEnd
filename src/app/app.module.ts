@@ -16,6 +16,7 @@ import { TrainProcessComponent } from './train-process/train-process.component';
 import { HttpClientModule } from '@angular/common/http';
 import {AuthHttp} from 'angular2-jwt';
 import {Service} from './services/Service';
+import { ResultComponent } from './text-analysis/result/result.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {Service} from './services/Service';
     TextAnalysisComponent,
     AnalyticsComponent,
     KeywordComponent,
-    TrainProcessComponent
+    TrainProcessComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,

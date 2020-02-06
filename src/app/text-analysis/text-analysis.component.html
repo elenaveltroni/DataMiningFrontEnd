@@ -1,44 +1,49 @@
-<div class="alert alert-warning" *ngIf="error">
-  <strong>Warning!</strong> Fill each field before continuing.
-</div>
-
-<div>
-  <div style="width: 100%; display: inline-flex; margin-top: 10px; border-bottom: solid #dcdcdc 1px; height: 40px;">
-    <div class="menuBox" [class.selectedBox]="tab==1" (click)="changeTabParam(1)">
-      Insert text
-    </div>
-    <div class="menuBox" [class.selectedBox]="tab==2" (click)="changeTabParam(2)">
-      Search Twitter
-    </div>
+<span *ngIf="!view_twitter">
+  <div class="alert alert-warning" *ngIf="error">
+    <strong>Warning!</strong> Fill each field before continuing.
   </div>
 
-  <div *ngIf="tab == 1" style="margin-top:20px;">
-    <select class="browser-default custom-select" [(ngModel)]="document" style="margin-bottom: 15px;">
-        <option *ngFor="let doc of documents" value="{{doc._id}}">{{doc.source}}</option>
-        <option *ngIf="documents.length == 0" value="undefined">No document</option>
-    </select>
-    <textarea type="text" rows="15" id="formText" class="md-textarea form-control" mdbInput placeholder="Enter the text to analyze" [(ngModel)]="text"></textarea>
-    <div>
-      <textarea type="text" rows="1" id="slitChar" class="md-textarea form-control textSplitCharacter" mdbInput placeholder="Enter the split character" [(ngModel)]="splitCharacter"></textarea>
+  <div>
+    <div style="width: 100%; display: inline-flex; margin-top: 10px; border-bottom: solid #dcdcdc 1px; height: 40px;">
+      <div class="menuBox" [class.selectedBox]="tab==1" (click)="changeTabParam(1)">
+        Insert text
+      </div>
+      <div class="menuBox" [class.selectedBox]="tab==2" (click)="changeTabParam(2)">
+        Search Twitter
+      </div>
+    </div>
+
+    <div *ngIf="tab == 1" style="margin-top:20px;">
+      <label>Select a document</label><br>
+      <select class="browser-default custom-select" [(ngModel)]="document" style="margin-bottom: 15px;">
+          <option *ngFor="let doc of documents" value="{{doc._id}}">{{doc.source}}</option>
+          <option *ngIf="documents.length == 0" value="undefined">No document</option>
+      </select>
+      <textarea type="text" rows="15" id="formText" class="md-textarea form-control" mdbInput placeholder="Enter the text to analyze" [(ngModel)]="text"></textarea>
+      <div>
+        <textarea type="text" rows="1" id="slitChar" class="md-textarea form-control textSplitCharacter" mdbInput placeholder="Enter the split character" [(ngModel)]="splitCharacter"></textarea>
+        <div style="float:right">
+          <button type="button" mdbBtn color="info" mdbWavesEffect (click)="splitByDot()">Slit by dot</button>
+          <button type="button" mdbBtn color="info" mdbWavesEffect (click)="splitByCharacter()">Enter a character to make the split</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="tab == 2" style="margin-top:20px;">
+      <textarea type="text" rows="1" id="formUrl" class="md-textarea form-control" mdbInput placeholder="Enter a username to search on twitter" [(ngModel)]="username"></textarea>
+      <div class="md-form">
+        <input type="date" id="start_date" class="form-control" [(ngModel)]="start_date" mdbInput>
+        <label for="start_date">Choose your start date</label>
+      </div>
+      <div class="md-form">
+        <input type="date" id="end_date" class="form-control" [(ngModel)]="end_date" mdbInput>
+        <label for="end_date">Choose your end date</label>
+      </div>
       <div style="float:right">
-        <button type="button" mdbBtn color="info" mdbWavesEffect (click)="splitByDot()">Slit by dot</button>
-        <button type="button" mdbBtn color="info" mdbWavesEffect (click)="splitByCharacter()">Enter a character to make the split</button>
+        <button type="button" mdbBtn color="info" mdbWavesEffect (click)="searchTwitter()">Search</button>
       </div>
     </div>
   </div>
+</span>
 
-  <div *ngIf="tab == 2" style="margin-top:20px;">
-    <textarea type="text" rows="1" id="formUrl" class="md-textarea form-control" mdbInput placeholder="Enter a username to search on twitter" [(ngModel)]="twitter"></textarea>
-    <div class="md-form">
-      <input type="date" id="start_date" class="form-control" [(ngModel)]="start_date" mdbInput>
-      <label for="start_date">Choose your start date</label>
-    </div>
-    <div class="md-form">
-      <input type="date" id="end_date" class="form-control" [(ngModel)]="end_date" mdbInput>
-      <label for="end_date">Choose your end date</label>
-    </div>
-    <div style="float:right">
-      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="searchTwitter()">Search</button>
-    </div>
-  </div>
-</div>
+<app-result *ngIf="view_twitter" [username]="username" [since]="start_date" [until]="end_date" (view_twitter)="viewTwitter($event)" ></app-result>

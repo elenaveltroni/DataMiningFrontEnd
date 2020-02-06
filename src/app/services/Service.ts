@@ -188,4 +188,21 @@ export class Service {
     });
   }
 
+  /*
+  TWITTER
+   */
+  getTwitter(username: string, start: string, end: string){
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded');
+
+    let params = username+'?since='+start+'&until='+end;
+
+    return new Promise(resolve => {
+      this.http.get(this.serverURL+"/tweets/"+params,{
+        headers
+      }).subscribe((data: any) => {
+        resolve(data);
+      });
+    });
+  }
 }

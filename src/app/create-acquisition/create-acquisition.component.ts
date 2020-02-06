@@ -37,6 +37,7 @@ export class CreateAcquisitionComponent implements OnInit {
   documentSource: string;
   documentDate: any;
   documentType: string;
+  documentTitle: string;
 
   selected_doc: string = undefined;
   documents: Document[] = [];
