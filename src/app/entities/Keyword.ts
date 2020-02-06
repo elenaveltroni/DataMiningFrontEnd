@@ -1,4 +1,5 @@
 export class Keyword{
-  value?: string;
+  value: string;
   type?: string;
+  _id?: {};
 }

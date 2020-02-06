@@ -16,34 +16,36 @@
     </div>
   </div>
 
-  <div *ngFor="let acquisition of textList" class="sectionContainer animated fadeIn">
-    <div class="sectionHeader">{{acquisition.acquisition}}</div>
+  <div *ngFor="let a of acquisitions" class="sectionContainer animated fadeIn">
+    <div class="sectionHeader">{{a.acquiror.name}} - {{a.target.name}}</div>
     <div class="sectionBody">
-      <div *ngFor="let documents of acquisition.documents" style="width:100%; margin-top: 10px">
-        <span style="font-weight: bold">{{documents.title}}</span>
-        <table mdbTable #tableEl="mdbTable" hover="true" class="table z-depth-0">
-          <thead class="sticky-top">
-            <tr>
-              <th>
-              </th>
-              <th>
-              </th>
-            </tr>
-          </thead>
-          <tbody #row>
-            <tr *ngFor="let phrase of documents.operations; let i = index">
-              <td style="width:88%">
-                {{phrase.phrase}}
-              </td>
-              <td style="text-align: right; font-size: 15pt">
-                <span *ngIf="phrase.sentiment == 1" style="color:green; font-weight: bold">{{phrase.sentiment}}</span>
-                <span *ngIf="phrase.sentiment == 0" style="font-weight: bold">{{phrase.sentiment}}</span>
-                <span *ngIf="phrase.sentiment == -1" style="color:red; font-weight: bold">{{phrase.sentiment}}</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div style="width:100%; margin-top: 10px" *ngIf="a.documents.length == 0">
+        No documents
       </div>
+      <span *ngIf="a.documents.length > 0">
+        <div *ngFor="let doc of a.documents" style="width:100%; margin-top: 10px">
+          <span style="font-weight: bold">{{doc.source}}</span>
+          <table mdbTable #tableEl="mdbTable" hover="true" class="table z-depth-0">
+            <tbody>
+              <tr *ngIf="sentences.length==0">
+                <td colspan="2">No sentences</td>
+              </tr>
+            </tbody>
+            <tbody #row>
+              <tr *ngFor="let s of sentences">
+                <td style="width:88%" *ngIf="s.document_id.$oid == doc._id.$oid">
+                  {{s.text}}
+                </td>
+                <td style="text-align: right; font-size: 15pt">
+                  <span *ngIf="s.class == '1'" style="color:green; font-weight: bold">{{s.class}}</span>
+                  <span *ngIf="s.class == '0'" style="font-weight: bold">{{s.class}}</span>
+                  <span *ngIf="s.class == '-1'" style="color:red; font-weight: bold">{{s.class}}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </span>
     </div>
 
   </div>

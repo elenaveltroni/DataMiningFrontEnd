@@ -13,7 +13,10 @@ import { TextAnalysisComponent } from './text-analysis/text-analysis.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { KeywordComponent } from './keyword/keyword.component';
 import { TrainProcessComponent } from './train-process/train-process.component';
-import { ModalKeywordComponent } from './keyword/modal-keyword/modal-keyword.component';
+import { HttpClientModule } from '@angular/common/http';
+import {AuthHttp} from 'angular2-jwt';
+import {Service} from './services/Service';
+
 
 @NgModule({
   declarations: [
@@ -23,16 +26,25 @@ import { ModalKeywordComponent } from './keyword/modal-keyword/modal-keyword.com
     TextAnalysisComponent,
     AnalyticsComponent,
     KeywordComponent,
-    TrainProcessComponent,
-    ModalKeywordComponent
+    TrainProcessComponent
   ],
   imports: [
     BrowserModule,
     MDBBootstrapModule.forRoot(),
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    Service,
+    {
+    provide: AuthHttp
+    },
+  ],
+  exports: [
+    RouterModule,
+    HttpClientModule,
+  ],
   bootstrap: [AppComponent]
 })
 

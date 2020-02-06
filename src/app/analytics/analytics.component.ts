@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Acquisition} from '../entities/Acquisition';
+import {Sentence} from '../entities/Sentence';
+import {Document} from '../entities/Document';
+import {Service} from '../services/Service';
 
 @Component({
   selector: 'app-analytics',
@@ -7,57 +11,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnalyticsComponent implements OnInit {
 
-  textList = [];
+  acquisitions: Acquisition[] = [];
+  sentences: Sentence[] = [];
   totalPositive = 0;
   totalNegative = 0;
   totalNeutral = 0;
 
-  constructor() { }
+  constructor(public service: Service) { }
 
-  ngOnInit() {
-    this.getTextList();
+  async ngOnInit() {
+    await this.getTextList();
   }
 
   getTextList(){
-    this.textList = [
-      {
-        "acquisition": "Acquisition 1",
-        "documents": [
-          {"title":"document 1.1",
-            "operations": [
-              {"phrase":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum efficitur erat nibh, non lobortis mi ultrices a. Quisque gravida ex nec turpis dapibus, in consequat turpis lobortis", "sentiment":1},
-              {"phrase":"Duis porta ligula quis dolor auctor condimentum.", "sentiment":0},
-              {"phrase":"Duis porta ligula quis dolor auctor condimentum.", "sentiment":-1},
-            ]
-          },
-          {"title":"document 1.2",
-            "operations": [
-              {"phrase":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum efficitur erat nibh, non lobortis mi ultrices a. Quisque gravida ex nec turpis dapibus, in consequat turpis lobortis", "sentiment":1},
-              {"phrase":"Duis porta ligula quis dolor auctor condimentum.", "sentiment":0},
-              {"phrase":"Duis porta ligula quis dolor auctor condimentum.", "sentiment":-1},
-            ]
+    this.service.getAllAcquisition().then((res: any) => {
+      if (res) {
+        this.acquisitions = res;
+        for (let j = 0; j < this.acquisitions.length; j++) {
+          for (let i = 0; i < this.acquisitions[j].documents.length; i++) {
+            let document: Document = this.acquisitions[j].documents[i];
+            this.service.getSentenceByIdDocument(document._id.$oid).then((data: any) => {
+              if (data) {
+                for(let k = 0; k < data.length; k++){
+                  this.sentences.push(data[k]);
+                  if(data[k].class == '1') this.totalPositive++;
+                  if(data[k].class == '0') this.totalNeutral++;
+                  if(data[k].class == '-1') this.totalNegative++;
+                }
+                console.log(this.sentences);
+              }
+            });
           }
-        ]
-      },
-      {
-        "acquisition": "Acquisition 2",
-        "documents": [
-          {"title":"document 2.1",
-            "operations": [
-              {"phrase":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum efficitur erat nibh, non lobortis mi ultrices a. Quisque gravida ex nec turpis dapibus, in consequat turpis lobortis", "sentiment":1},
-              {"phrase":"Duis porta ligula quis dolor auctor condimentum.", "sentiment":0},
-              {"phrase":"Duis porta ligula quis dolor auctor condimentum.", "sentiment":-1},
-            ]
-          },
-          {"title":"document 2.2",
-            "operations": [
-              {"phrase":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum efficitur erat nibh, non lobortis mi ultrices a. Quisque gravida ex nec turpis dapibus, in consequat turpis lobortis", "sentiment":1},
-              {"phrase":"Duis porta ligula quis dolor auctor condimentum.", "sentiment":0},
-              {"phrase":"Duis porta ligula quis dolor auctor condimentum.", "sentiment":-1},
-            ]
-          }
-        ]
+        }
       }
-    ];
+    });
   }
 }

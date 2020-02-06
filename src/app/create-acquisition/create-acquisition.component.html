@@ -1,40 +1,142 @@
-<h3>Create new acquisition</h3>
-<div class="md-form">
-  <textarea rows="1" type="text" id="acquirorName" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorName"></textarea>
-  <label for="acquirorName">Acquiror Name</label>
-</div>
-<div class="md-form">
-  <textarea rows="1" type="text" id="acquirorTicker" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorTicker"></textarea>
-  <label for="acquirorTicker">Acquiror Ticker</label>
-</div>
-<div class="md-form">
-  <textarea rows="1" type="text" id="acquirorState" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorState"></textarea>
-  <label for="acquirorState">Acquiror State</label>
-</div>
-<div class="md-form">
-  <textarea rows="1" type="text" id="targetName" class="md-textarea form-control" mdbInput [(ngModel)]="targetName"></textarea>
-  <label for="targetName">Target Name</label>
-</div>
-<div class="md-form">
-  <textarea rows="1" type="text" id="targetTicker" class="md-textarea form-control" mdbInput [(ngModel)]="targetTicker"></textarea>
-  <label for="targetTicker">Target Ticker</label>
-</div>
-<div class="md-form">
-  <textarea rows="1" type="text" id="targetState" class="md-textarea form-control" mdbInput [(ngModel)]="targetState"></textarea>
-  <label for="targetState">Target State</label>
-</div>
-<div class="md-form">
-  <textarea rows="1" type="text" id="announcementDate" class="md-textarea form-control" mdbInput [(ngModel)]="announcementDate"></textarea>
-  <label for="announcementDate">Announcement Date</label>
-</div>
-<div class="md-form">
-  <label>Status of the operation</label><br><br>
-  <select class="browser-default custom-select" [(ngModel)]="status">
-    <option value="IN_PROGRESS">In progress</option>
-    <option value="COMPLETE">Complete</option>
-  </select>
+<div class="alert alert-success" *ngIf="success">
+  <strong>Success!</strong> The insertion was successful.
 </div>
 
-<div style="float:right">
-  <button type="button" mdbBtn color="info" mdbWavesEffect (click)="save()" [disabled]="allFormFilled()">Save</button>
+<div class="alert alert-danger" *ngIf="danger">
+  <strong>Warning!</strong> A problem occurred, please try again.
 </div>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-accordion" type="button" (click)="accordion1 = !accordion1; accordion2 = false; accordion3 = false; success = false; danger = false" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <span style="font-size: 12pt; color:#0099CC">Create new acquisition</span>
+        </button>
+      </h2>
+    </div>
+
+    <div *ngIf="accordion1" id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <div class="md-form">
+          <textarea rows="1" type="text" id="acquirorName" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorName"></textarea>
+          <label for="acquirorName">Acquiror Name</label>
+        </div>
+        <div class="md-form">
+          <textarea rows="1" type="text" id="acquirorTicker" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorTicker"></textarea>
+          <label for="acquirorTicker">Acquiror Ticker</label>
+        </div>
+        <div class="md-form">
+          <textarea rows="1" type="text" id="acquirorState" class="md-textarea form-control" mdbInput [(ngModel)]="acquirorState"></textarea>
+          <label for="acquirorState">Acquiror State</label>
+        </div>
+        <div class="md-form">
+          <textarea rows="1" type="text" id="targetName" class="md-textarea form-control" mdbInput [(ngModel)]="targetName"></textarea>
+          <label for="targetName">Target Name</label>
+        </div>
+        <div class="md-form">
+          <textarea rows="1" type="text" id="targetTicker" class="md-textarea form-control" mdbInput [(ngModel)]="targetTicker"></textarea>
+          <label for="targetTicker">Target Ticker</label>
+        </div>
+        <div class="md-form">
+          <textarea rows="1" type="text" id="targetState" class="md-textarea form-control" mdbInput [(ngModel)]="targetState"></textarea>
+          <label for="targetState">Target State</label>
+        </div>
+        <div class="md-form">
+          <input type="date" id="announcementDate" class="form-control" [(ngModel)]="announcementDate" mdbInput>
+          <label for="announcementDate">Announcement Date</label>
+        </div>
+        <div class="md-form">
+          <label>Status of the operation</label><br><br>
+          <select class="browser-default custom-select" [(ngModel)]="status">
+            <option value="IN_PROGRESS">In progress</option>
+            <option value="COMPLETE">Complete</option>
+          </select>
+        </div>
+        <div class="md-form" *ngIf="status == 'COMPLETE'">
+          <input type="date" id="signinDate" class="form-control" [(ngModel)]="signinDate" mdbInput>
+          <label for="signinDate">End Date</label>
+        </div>
+      </div>
+      <div style="float:right">
+        <button type="button" mdbBtn color="info" mdbWavesEffect (click)="saveAcquisition()" [disabled]="allFormAcquisitionFilled()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-accordion" type="button" (click)="accordion1 = false; accordion2 = !accordion2; accordion3 = false; success = false; danger = false" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <span style="font-size: 12pt; color:#0099CC">Create new document</span>
+        </button>
+      </h2>
+    </div>
+    <div *ngIf="accordion2" id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        <div class="md-form">
+          <select class="browser-default custom-select" [(ngModel)]="selected_acquisition" style="margin-bottom: 15px;" id="documents">
+            <option *ngFor="let acq of acquisitions" value="{{acq._id.$oid}}">{{acq.acquiror.name}} - {{acq.target.name}}</option>
+            <option *ngIf="acquisitions.length == 0" value="undefined">No document</option>
+          </select>
+          <label for="documents">Documents</label>
+        </div>
+        <div class="md-form">
+          <textarea rows="1" id="documentLink" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="documentLink"></textarea>
+          <label for="documentLink">Link</label>
+        </div>
+        <div class="md-form">
+          <textarea rows="1" id="documentSource" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="documentSource"></textarea>
+          <label for="acquirorState">Source</label>
+        </div>
+        <div class="md-form">
+          <input type="date" id="date" class="form-control" [(ngModel)]="documentDate" mdbInput>
+          <label for="date">Date</label>
+        </div>
+        <div class="md-form">
+          <textarea rows="1" id="documentType" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="documentType"></textarea>
+          <label for="documentType">Type</label>
+        </div>
+      </div>
+      <div style="float:right">
+        <button type="button" mdbBtn color="info" mdbWavesEffect (click)="saveDocument()" [disabled]="allFormDocumentFilled()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingTree">
+      <h2 class="mb-0">
+        <button class="btn btn-accordion" type="button" (click)="accordion1 = false; accordion2 = false; accordion3 = !accordion3; success = false; danger = false" data-toggle="collapse" data-target="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
+          <span style="font-size: 12pt; color:#0099CC">Create new sentence</span>
+        </button>
+      </h2>
+    </div>
+    <div *ngIf="accordion3" id="collapseTree" class="collapse show" aria-labelledby="headingTree" data-parent="#accordionExample">
+      <div class="card-body">
+        <div class="md-form">
+          <select class="browser-default custom-select" [(ngModel)]="selected_doc" style="margin-bottom: 15px;">
+            <option *ngFor="let doc of documents" value="{{doc._id.$oid}}">{{doc.source}}</option>
+            <option *ngIf="documents.length == 0" value="undefined">No document</option>
+          </select>
+        </div>
+        <div class="md-form">
+          <textarea rows="1" id="text" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="text"></textarea>
+          <label for="text">Text</label>
+        </div>
+        <div class="md-form">
+          <textarea rows="1" id="class" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="class"></textarea>
+          <label for="class">Class</label>
+        </div>
+        <div class="md-form">
+          <textarea rows="1" id="type" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="type"></textarea>
+          <label for="type">Type</label>
+        </div>
+      </div>
+      <div style="float:right">
+        <button type="button" mdbBtn color="info" mdbWavesEffect (click)="saveSentence()" [disabled]="allFormSentenceFilled()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+

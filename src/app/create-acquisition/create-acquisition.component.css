@@ -1,0 +1,7 @@
+.btn-accordion{
+  box-shadow: none;
+}
+
+.btn-accordion :hover{
+  font-weight: bold;
+}
