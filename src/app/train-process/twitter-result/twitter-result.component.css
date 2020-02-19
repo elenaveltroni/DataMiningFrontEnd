@@ -1,0 +1,28 @@
+.sectionContainer{
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px !important;
+  margin-top: 15px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.sectionHeader{
+  padding: 15px;
+  border-bottom: solid 1px #e0dfe0;
+  font-size: 16pt;
+  color: #2f4e5c;
+}
+
+.sectionBody{
+  padding: 15px;
+}
+
+.col2{
+  width: calc(100% - 500px);
+}
+
+.backBtn{
+  background-color: white;
+  box-shadow: none;
+  border: none;
+  margin-bottom: 50px;
+}

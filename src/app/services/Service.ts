@@ -83,14 +83,25 @@ export class Service {
   /*
   SENTENCE
    */
-  insertSentence(sentence: Sentence){
+  insertSentence(type:string, sentences: any, id?:string){
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
-
-    let body = JSON.stringify(sentence);
+    let body;
+    if(id != undefined)
+      body = JSON.stringify({
+        "document_id": id,
+        "type": type,
+        "sentences": sentences
+      });
+    else{
+      body = JSON.stringify({
+        "type": type,
+        "sentences": sentences
+      });
+    }
 
     return new Promise(resolve => {
-      this.http.post(this.serverURL+"/sentence", body,{
+      this.http.post(this.serverURL+"/sentence",body, {
         headers
       }).subscribe((data: any) => {
         resolve(data);
@@ -205,4 +216,51 @@ export class Service {
       });
     });
   }
+
+  /*
+  PREDICT
+   */
+  predict(model: string, sentences: any){
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    let b = {
+      "model": model,
+      "sentences": sentences
+    };
+    let body = JSON.stringify(b);
+
+    return new Promise(resolve => {
+      this.http.post(this.serverURL+"/predict",body, {
+        headers
+      }).subscribe((data: any) => {
+        resolve(data);
+      });
+    });
+  }
+
+  /*
+  TRAIN
+   */
+  train(){
+  }
+
+  /*
+  CLUSTER
+   */
+  cluster(threshold: number){
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+
+    let b = {"threshold": threshold};
+    let body = JSON.stringify(b);
+
+    return new Promise(resolve => {
+      this.http.post(this.serverURL+"/cluster",body, {
+        headers
+      }).subscribe((data: any) => {
+        resolve(data);
+      });
+    });
+  }
+
 }

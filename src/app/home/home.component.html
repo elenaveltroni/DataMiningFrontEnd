@@ -1,6 +1,6 @@
 <div class="toolbar">
   <!--Navbar-->
-  <mdb-navbar SideClass="navnbar navbar-1 navbar-light info-color lighten-2" [containerInside]="false" style="color: white; border:none" #navbar>
+  <mdb-navbar SideClass="navnbar navbar-1 navbar-light info-color lighten-2" [containerInside]="false" style="color: white; border:none; padding-bottom:10px" #navbar>
 
     <!-- Collapsible content -->
     <links>
@@ -10,10 +10,13 @@
           <a class="nav-link waves-light" [class.active]="component == 'home'" mdbWavesEffect (click)="this.navbar.hide(); component = 'home'">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link waves-light" [class.active]="component == 'create-acquisition'" mdbWavesEffect (click)="this.navbar.hide(); component = 'create-acquisition';">Create Acquisition</a>
+          <a class="nav-link waves-light" [class.active]="component == 'analytics'" mdbWavesEffect (click)="this.navbar.hide(); component = 'analytics'">Analytics</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link waves-light" [class.active]="component == 'analytics'" mdbWavesEffect (click)="this.navbar.hide(); component = 'analytics'">Analytics</a>
+          <a class="nav-link waves-light" [class.active]="component == 'cluster'" mdbWavesEffect (click)="this.navbar.hide(); component = 'cluster';">Clustering</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-light" [class.active]="component == 'create-acquisition'" mdbWavesEffect (click)="this.navbar.hide(); component = 'create-acquisition';">Create Acquisition</a>
         </li>
         <li class="nav-item">
           <a class="nav-link waves-light" [class.active]="component == 'keyword'" mdbWavesEffect (click)="this.navbar.hide(); component = 'keyword'">Add/Remove keyword</a>
@@ -31,6 +34,7 @@
 <div class="content">
   <app-text-analysis *ngIf="component == 'home'"></app-text-analysis>
   <app-create-acquisition *ngIf="component == 'create-acquisition'"></app-create-acquisition>
+  <app-cluster *ngIf="component == 'cluster'"></app-cluster>
   <app-analytics *ngIf="component == 'analytics'"></app-analytics>
   <app-keyword *ngIf="component == 'keyword'"></app-keyword>
   <app-train-process *ngIf="component == 'train-process'"></app-train-process>

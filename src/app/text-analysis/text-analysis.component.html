@@ -1,4 +1,4 @@
-<span *ngIf="!view_twitter">
+<span *ngIf="!view_result">
   <div class="alert alert-warning" *ngIf="error">
     <strong>Warning!</strong> Fill each field before continuing.
   </div>
@@ -16,15 +16,27 @@
     <div *ngIf="tab == 1" style="margin-top:20px;">
       <label>Select a document</label><br>
       <select class="browser-default custom-select" [(ngModel)]="document" style="margin-bottom: 15px;">
-          <option *ngFor="let doc of documents" value="{{doc._id}}">{{doc.source}}</option>
+          <option *ngFor="let doc of documents" value="{{doc._id}}">{{doc.source}} - {{doc.type}}</option>
           <option *ngIf="documents.length == 0" value="undefined">No document</option>
       </select>
-      <textarea type="text" rows="15" id="formText" class="md-textarea form-control" mdbInput placeholder="Enter the text to analyze" [(ngModel)]="text"></textarea>
+      <textarea type="text" rows="10" id="formText" class="md-textarea form-control" mdbInput placeholder="Enter the text to analyze" [(ngModel)]="text"></textarea>
+
+      <div class="md-form">
+        <input type="text" id="splitCharacter" class="form-control" [(ngModel)]="splitCharacter" mdbInput>
+        <!--<textarea rows="1" id="documentSource" type="text" class="md-textarea form-control" mdbInput [(ngModel)]="documentSource"></textarea>-->
+        <label for="splitCharacter">Enter the split character</label>
+      </div>
       <div>
-        <textarea type="text" rows="1" id="slitChar" class="md-textarea form-control textSplitCharacter" mdbInput placeholder="Enter the split character" [(ngModel)]="splitCharacter"></textarea>
+        <label>Select a classifier</label><br>
+        <select class="browser-default custom-select" [(ngModel)]="train" style="margin-bottom: 15px;">
+          <option value="svm">SVM</option>
+          <option value="1">Simple Logistic</option>
+          <option value="2">K-NN</option>
+        </select>
+      </div>
+      <div>
         <div style="float:right">
-          <button type="button" mdbBtn color="info" mdbWavesEffect (click)="splitByDot()">Slit by dot</button>
-          <button type="button" mdbBtn color="info" mdbWavesEffect (click)="splitByCharacter()">Enter a character to make the split</button>
+          <button type="button" mdbBtn color="info" mdbWavesEffect (click)="split()">Run</button>
         </div>
       </div>
     </div>
@@ -40,10 +52,10 @@
         <label for="end_date">Choose your end date</label>
       </div>
       <div style="float:right">
-        <button type="button" mdbBtn color="info" mdbWavesEffect (click)="searchTwitter()">Search</button>
+        <button type="button" mdbBtn color="info" mdbWavesEffect (click)="searchTwitter()">Run</button>
       </div>
     </div>
   </div>
 </span>
 
-<app-result *ngIf="view_twitter" [username]="username" [since]="start_date" [until]="end_date" (view_twitter)="viewTwitter($event)" ></app-result>
+<app-result *ngIf="view_result" [array] ="array_split" [model]="train" [username]="username" [since]="start_date" [until]="end_date" (view_result)="viewTwitter($event)" ></app-result>

@@ -1,3 +1,5 @@
+import {Document} from './Document';
+
 export class Acquisition {
   _id: Ob;
   annuncement_date?: any = new Date(); //timestamp
@@ -5,7 +7,7 @@ export class Acquisition {
   status?: string;
   acquiror?: Acquiror;
   target?: Target;
-  documents?: [];
+  documents?: Document[] = [];
 }
 
 export class Acquiror{

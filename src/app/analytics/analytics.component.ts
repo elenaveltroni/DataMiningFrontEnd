@@ -32,13 +32,14 @@ export class AnalyticsComponent implements OnInit {
             let document: Document = this.acquisitions[j].documents[i];
             this.service.getSentenceByIdDocument(document._id.$oid).then((data: any) => {
               if (data) {
+                //document.sentences = data;
+                this.acquisitions[j].documents[i].sentences = data;
                 for(let k = 0; k < data.length; k++){
-                  this.sentences.push(data[k]);
                   if(data[k].class == '1') this.totalPositive++;
                   if(data[k].class == '0') this.totalNeutral++;
                   if(data[k].class == '-1') this.totalNegative++;
                 }
-                console.log(this.sentences);
+                console.log(this.acquisitions[j]);
               }
             });
           }

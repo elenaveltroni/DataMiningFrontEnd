@@ -2,15 +2,15 @@
   <h3>Analytics</h3>
 
   <div style="display: inline-flex; width: 100%; margin-bottom: 20px; margin-top:20px; text-align: center;">
-    <div class="sectionContainer animated fadeIn" style="margin: auto; color:green !important;">
+    <div class="sectionContainer animated fadeIn" style="margin: auto; color:green !important; width:30%">
       <div class="sectionHeader" style="color:green !important;">{{totalPositive}}</div>
       <div class="sectionBody">Total positive phrases</div>
     </div>
-    <div class="sectionContainer animated fadeIn"style="margin: auto;">
+    <div class="sectionContainer animated fadeIn"style="margin: auto; width:30%">
       <div class="sectionHeader">{{totalNeutral}}</div>
       <div class="sectionBody">Total neutral phrases</div>
     </div>
-    <div class="sectionContainer animated fadeIn" style="margin: auto; color:red !important;">
+    <div class="sectionContainer animated fadeIn" style="margin: auto; color:red !important; width:30%">
       <div class="sectionHeader" style="color:red !important;">{{totalNegative}}</div>
       <div class="sectionBody">Total negative phrases</div>
     </div>
@@ -24,19 +24,19 @@
       </div>
       <span *ngIf="a.documents.length > 0">
         <div *ngFor="let doc of a.documents" style="width:100%; margin-top: 10px">
-          <span style="font-weight: bold">{{doc.source}}</span>
+          <span style="font-weight: bold">{{doc.source}} - {{doc.type}}</span>
           <table mdbTable #tableEl="mdbTable" hover="true" class="table z-depth-0">
             <tbody>
-              <tr *ngIf="sentences.length==0">
+              <tr *ngIf="doc.sentences.length == 0">
                 <td colspan="2">No sentences</td>
               </tr>
             </tbody>
             <tbody #row>
-              <tr *ngFor="let s of sentences">
-                <td style="width:88%" *ngIf="s.document_id.$oid == doc._id.$oid">
+              <tr *ngFor="let s of doc.sentences">
+                <td style="width:88%">
                   {{s.text}}
                 </td>
-                <td style="text-align: right; font-size: 15pt">
+                <td style="text-align: right; font-size: 15pt; vertical-align: middle">
                   <span *ngIf="s.class == '1'" style="color:green; font-weight: bold">{{s.class}}</span>
                   <span *ngIf="s.class == '0'" style="font-weight: bold">{{s.class}}</span>
                   <span *ngIf="s.class == '-1'" style="color:red; font-weight: bold">{{s.class}}</span>

@@ -17,6 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
 import {AuthHttp} from 'angular2-jwt';
 import {Service} from './services/Service';
 import { ResultComponent } from './text-analysis/result/result.component';
+import { PhraseResultComponent } from './train-process/phrase-result/phrase-result.component';
+import { TwitterResultComponent } from './train-process/twitter-result/twitter-result.component';
+import { ClusterComponent } from './cluster/cluster.component';
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { ResultComponent } from './text-analysis/result/result.component';
     AnalyticsComponent,
     KeywordComponent,
     TrainProcessComponent,
-    ResultComponent
+    ResultComponent,
+    PhraseResultComponent,
+    TwitterResultComponent,
+    ClusterComponent
   ],
   imports: [
     BrowserModule,

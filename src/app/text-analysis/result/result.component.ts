@@ -9,34 +9,49 @@ import {Service} from '../../services/Service';
 })
 export class ResultComponent implements OnInit {
 
-  @Input() username: string;
-  @Input() since: string;
-  @Input() until: string;
+  @Input() array? = [];
+  @Input() username?: string;
+  @Input() since?: string;
+  @Input() until?: string;
+  @Input() model?: string;
 
-  @Output() view_twitter? = new EventEmitter<boolean>();
+  @Output() view_result? = new EventEmitter<boolean>();
 
   tweets_obj = {
     tweets: []
   };
-  tweets_list = [];
+  list = [];
+  twitter = false;
+  text = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private service: Service) {
 
   }
 
   ngOnInit() {
-    console.log(this.until);
-    this.service.getTwitter(this.username, this.since, this.until).then((res:any) => {
-      if(res){
-        this.tweets_obj = res;
-        console.log(this.tweets_obj.tweets);
-        this.tweets_list = this.tweets_obj.tweets;
-      }
-    })
+    if(this.username != undefined) {
+      this.twitter = true;
+      this.service.getTwitter(this.username, this.since, this.until).then((res: any) => {
+        if (res) {
+          this.tweets_obj = res;
+          console.log(this.tweets_obj.tweets);
+          this.list = this.tweets_obj.tweets;
+        }
+      })
+    }
+    else{
+      this.text = true;
+      this.service.predict(this.model, this.array).then((res: any) => {
+        if (res) {
+          this.list = res;
+        }
+      })
+    }
+    console.log(this.list);
   }
 
   back(){
     console.log('back');
-    this.view_twitter.emit(false);
+    this.view_result.emit(false);
   }
 }

@@ -5,3 +5,9 @@
 .btn-accordion :hover{
   font-weight: bold;
 }
+
+.btnSave{
+  margin-bottom: 15px;
+  margin-right: 15px;
+  margin-top: -15px;
+}

@@ -92,6 +92,7 @@ export class CreateAcquisitionComponent implements OnInit {
   }
 
   saveDocument(){
+    this.document.title = this.documentTitle;
     this.document.link = this.documentLink;
     this.document.source = this.documentSource;
     this.document.date = this.documentDate;
@@ -102,24 +103,6 @@ export class CreateAcquisitionComponent implements OnInit {
       if (data) {
         this.success = true;
         this.accordion2 = false;
-      } else {
-        this.danger = true;
-      }
-    }).catch( error => {
-      this.danger = true;
-    });
-  }
-
-  saveSentence(){
-    this.sentence.text = this.text;
-    this.sentence.type = this.type;
-    this.sentence.class = this.class;
-    this.sentence.document_id = {'$oid': this.selected_doc};
-
-    this.service.insertSentence(this.sentence).then(data => {
-      if (data) {
-        this.success = true;
-        this.accordion3 = false;
       } else {
         this.danger = true;
       }

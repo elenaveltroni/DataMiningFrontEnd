@@ -3,23 +3,39 @@
     <mdb-icon fas icon="chevron-left"></mdb-icon> Indietro
   </button>
 
-  <h3>Tweets results</h3>
+  <h3>Results</h3>
 
   <div class="sectionContainer animated fadeIn">
     <div class="sectionBody">
-      <div style="width:100%; margin-top: 10px" *ngIf="tweets_list.length == 0">
+      <div style="width:100%; margin-top: 10px" *ngIf="list.length == 0 && twitter">
         No results found
       </div>
-      <span *ngIf="tweets_list.length > 0">
+      <span *ngIf="list.length > 0 && twitter">
         <div style="width:100%; margin-top: 10px">
           <table mdbTable #tableEl="mdbTable" hover="true" class="table z-depth-0">
             <tbody #row>
-              <tr *ngFor="let tweet of tweets_list; let i = index">
+              <tr *ngFor="let l of list; let i = index">
                 <td style="width:88%">
-                  {{tweet}}
+                  {{l}}
                 </td>
                 <td style="text-align: right; font-size: 15pt">
-                  <input type="text" id="sentiment" class="form-control" mdbInput>
+                  <input type="text" id="sentiment{{i}}" class="form-control" mdbInput>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </span>
+      <span *ngIf="list.length > 0 && text">
+        <div style="width:100%; margin-top: 10px">
+          <table mdbTable #tableEl="mdbTable" hover="true" class="table z-depth-0">
+            <tbody #row>
+              <tr *ngFor="let l of list; let i = index">
+                <td style="width:88%">
+                  {{l.sentence}}
+                </td>
+                <td style="text-align: right; font-size: 15pt">
+                  {{l.prediction}}
                 </td>
               </tr>
             </tbody>
@@ -28,6 +44,9 @@
       </span>
     </div>
 
+    <div style="float:right">
+      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="addTraining()">Save result</button>
+    </div>
   </div>
 
 </div>

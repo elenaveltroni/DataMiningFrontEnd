@@ -1,0 +1,43 @@
+<div>
+  <button *ngIf="view_image" class="backBtn" (click)="back()">
+    <mdb-icon fas icon="chevron-left"></mdb-icon> Indietro
+  </button>
+  <h3 style="width:100%">Clustering</h3>
+  <div class="md-form" *ngIf="!view_image">
+    <input type="text" id="splitCharacter" class="form-control" [(ngModel)]="threshold" mdbInput>
+    <label for="splitCharacter">Enter the threshold</label>
+  </div>
+
+  <div>
+    <div style="float:right" *ngIf="!view_image">
+      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="visualize()">Visualize dendogram</button>
+    </div>
+  </div>
+
+  <div *ngIf="view_image">
+    <div *ngIf="loading" style="width: 100%; text-align: center; margin-top: 30px;">Loading..</div>
+    <div style="width: 100%;text-align: center">
+      <img src="{{img_url}}" id="img" style="width: 80%;">
+    </div>
+
+    <div style="width:100%; margin-top: 10px" *ngIf="!loading">
+      <table mdbTable #tableEl="mdbTable" hover="true" class="table z-depth-0">
+        <tbody #row>
+        <tr *ngFor="let s of sentences; let i = index">
+          <td style="width:88%">
+            {{s.text}}
+          </td>
+          <td style="text-align: right; font-size: 15pt; vertical-align: middle;">
+            {{s.cluster}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+
+
+

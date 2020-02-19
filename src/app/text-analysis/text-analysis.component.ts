@@ -13,69 +13,63 @@ export class TextAnalysisComponent implements OnInit {
   tab: number = 0;
   text: string = '';
   splitCharacter: string = undefined;
-  username = '';
-  document: any = undefined; //???
+  username:string = undefined;
+  document: any = undefined;
   documents: Document[] = [];
   end_date: any;
   start_date:any;
   error = false;
+  train: number = 0;
+  array_split =  [];
 
-  view_twitter:boolean = false;
+  view_result:boolean = false;
 
   acquisitions: Acquisition[] = [];
 
-  constructor(private service: Service, private router: Router) { }
+  constructor(private service: Service, private router: Router) {
+    this.getDocument();
+  }
 
   ngOnInit() {
     this.changeTabParam(1);
-    this.getDocument();
   }
 
   changeTabParam(tab: number) {
     this.tab = tab;
   }
 
-  splitByDot(){
-    if(this.document == undefined || this.text == '')
+  split(){
+    this.view_result = true;
+    if (this.document == undefined || this.text == '')
       this.error = true;
-    else {
-      let arraySplit = [];
-      arraySplit = this.text.split(".");
-      console.log(this.text);
-      console.log(arraySplit);
-    }
-  }
 
-  splitByCharacter(){
-    if(this.document == undefined || this.splitCharacter == undefined || this.text == '')
-      this.error = true;
-    else {
-      let arraySplit = [];
-      arraySplit = this.text.split(this.splitCharacter);
-      console.log(this.text);
-      console.log(arraySplit);
+    if(this.splitCharacter == undefined) {
+      this.array_split = this.text.split(".");
+    }
+    else{
+      this.array_split = this.text.split(this.splitCharacter);
     }
   }
 
   searchTwitter(){
-    this.view_twitter = true;
-    let start_date = new Date(this.start_date);
-    let start_day = start_date.getDate() < 10?'0'+start_date.getDate():start_date.getDate();
-    let start_month: number = start_date.getMonth()+1;
-    let s_month = start_month < 10 ? '0'+start_month : start_month;
-    let start = start_date.getFullYear()+'-'+s_month+'-'+start_day;
+    this.view_result = true;
+    let start = '';
+    let end = '';
+    if(this.start_date != undefined){
+      let start_date = new Date(this.start_date);
+      let start_day = start_date.getDate() < 10?'0'+start_date.getDate():start_date.getDate();
+      let start_month: number = start_date.getMonth()+1;
+      let s_month = start_month < 10 ? '0'+start_month : start_month;
+      start = start_date.getFullYear()+'-'+s_month+'-'+start_day;
+    }
 
-    if(this.end_date == undefined)
-      this.end_date = new Date();
-
-    let end_date = new Date(this.end_date);
-    let end_day = end_date.getDate() < 10?'0'+end_date.getDate():end_date.getDate();
-    let end_month: number = end_date.getMonth()+1;
-    let e_month = end_month < 10 ? '0'+end_month : end_month;
-    let end = end_date.getFullYear()+'-'+e_month+'-'+end_day;
-    console.log(end_month);
-    console.log(start_month);
-
+    if(this.end_date != undefined){
+      let end_date = new Date(this.end_date);
+      let end_day = end_date.getDate() < 10?'0'+end_date.getDate():end_date.getDate();
+      let end_month: number = end_date.getMonth()+1;
+      let e_month = end_month < 10 ? '0'+end_month : end_month;
+      end = end_date.getFullYear()+'-'+e_month+'-'+end_day;
+    }
   }
 
   getDocument(){
@@ -92,7 +86,7 @@ export class TextAnalysisComponent implements OnInit {
   }
 
   viewTwitter(view: boolean){
-    this.view_twitter = view;
+    this.view_result = view;
   }
 
 }

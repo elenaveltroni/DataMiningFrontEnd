@@ -1,0 +1,36 @@
+<div>
+  <button class="backBtn" (click)="back()">
+    <mdb-icon fas icon="chevron-left"></mdb-icon> Indietro
+  </button>
+
+  <h3>Tweets results</h3>
+
+  <div class="sectionContainer animated fadeIn">
+    <div class="sectionBody">
+      <div style="width:100%; margin-top: 10px" *ngIf="tweets_list.length == 0">
+        No results found
+      </div>
+      <span *ngIf="tweets_list.length > 0">
+        <div style="width:100%; margin-top: 10px">
+          <table mdbTable #tableEl="mdbTable" hover="true" class="table z-depth-0">
+            <tbody #row>
+              <tr *ngFor="let tweet of tweets_list; let i = index">
+                <td style="width:88%" *ngIf='tweet != ""'>
+                  {{tweet}}
+                </td>
+                <td style="text-align: right; font-size: 15pt">
+                  <input type="text" id="sentiment{{i}}" class="form-control" mdbInput>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </span>
+    </div>
+
+    <div style="float:right">
+      <button type="button" mdbBtn color="info" mdbWavesEffect (click)="addTraining()">Add to training set</button>
+    </div>
+  </div>
+
+</div>
