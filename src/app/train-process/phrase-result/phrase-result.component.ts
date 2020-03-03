@@ -14,6 +14,10 @@ export class PhraseResultComponent implements OnInit {
   @Output() view_phrases? = new EventEmitter<boolean>();
 
   senteces = [];
+  result: boolean = false;
+  knn = {};
+  logistic = {};
+  svm = {};
 
   constructor(private router: Router, private route: ActivatedRoute, private service: Service) { }
 
@@ -22,7 +26,11 @@ export class PhraseResultComponent implements OnInit {
 
   back(){
     console.log('back');
-    this.view_phrases.emit(false);
+    if(this.result)
+      this.result = false;
+    else{
+      this.view_phrases.emit(false);
+    }
   }
 
   addTraining(){
@@ -35,9 +43,12 @@ export class PhraseResultComponent implements OnInit {
     this.service.insertSentence('text', this.senteces, this.document_id).then((res: any) => {
       if(res) {
         console.log(res);
-        this.service.train().then((res: any) => {
-          if(res) {
-            console.log(res);
+        this.result = true;
+        this.service.train().then((data: any) => {
+          if(data) {
+            this.knn = data.knn;
+            this.svm = data.svm;
+            this.logistic = data.logistic;
           }
         });
       }

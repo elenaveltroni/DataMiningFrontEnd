@@ -20,6 +20,7 @@ import { ResultComponent } from './text-analysis/result/result.component';
 import { PhraseResultComponent } from './train-process/phrase-result/phrase-result.component';
 import { TwitterResultComponent } from './train-process/twitter-result/twitter-result.component';
 import { ClusterComponent } from './cluster/cluster.component';
+import { TrainingResultComponent } from './train-process/phrase-result/training-result/training-result.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ClusterComponent } from './cluster/cluster.component';
     ResultComponent,
     PhraseResultComponent,
     TwitterResultComponent,
-    ClusterComponent
+    ClusterComponent,
+    TrainingResultComponent
   ],
   imports: [
     BrowserModule,

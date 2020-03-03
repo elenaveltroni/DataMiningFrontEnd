@@ -11,7 +11,7 @@ import {Keyword} from '../entities/Keyword';
 })
 
 export class Service {
-  serverURL = "http://6d0d9b62.ngrok.io"; //"http://78.46.192.21:8080";
+  serverURL = "http://78.46.192.21:8080"; //"http://6d0d9b62.ngrok.io";
 
   constructor(private http: HttpClient) {
   }

@@ -5,7 +5,7 @@
 
   <h3>Result</h3>
 
-  <div class="sectionContainer animated fadeIn">
+  <div class="sectionContainer animated fadeIn" *ngIf="!result">
     <div class="sectionBody">
       <div style="width:100%; margin-top: 10px" *ngIf="array_split.length == 0">
         No results found
@@ -31,6 +31,379 @@
     <div style="float:right">
       <button type="button" mdbBtn color="info" mdbWavesEffect (click)="addTraining()">Add to training set</button>
     </div>
+  </div>
+
+  <div *ngIf="result">
+
+    <div class="sectionContainer animated fadeIn" style="margin: auto; color:green !important; width:100%; margin-bottom: 20px;">
+      <div class="sectionHeader">K-NN</div>
+      <div class="sectionBody">
+        <table mdbTable #tableEl="mdbTable" hover="true" class="table z-depth-0" style="text-align: center">
+          <tbody #row>
+          <tr style="font-weight: bold">
+            <th>
+            </th>
+            <th>
+              a
+            </th>
+            <th>
+              b
+            </th>
+            <th>
+              c
+            </th>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              a = -1
+            </td>
+            <td>
+              {{knn.confusion_matrix[0][0]}}
+            </td>
+            <td>
+              {{knn.confusion_matrix[0][1]}}
+            </td>
+            <td>
+              {{knn.confusion_matrix[0][2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              b = 0
+            </td>
+            <td>
+              {{knn.confusion_matrix[1][0]}}
+            </td>
+            <td>
+              {{knn.confusion_matrix[1][1]}}
+            </td>
+            <td>
+              {{knn.confusion_matrix[1][2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              c = 1
+            </td>
+            <td>
+              {{knn.confusion_matrix[2][0]}}
+            </td>
+            <td>
+              {{knn.confusion_matrix[2][1]}}
+            </td>
+            <td>
+              {{knn.confusion_matrix[2][2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              Precision
+            </td>
+            <td>
+              {{knn.precision[0]}}
+            </td>
+            <td>
+              {{knn.precision[1]}}
+            </td>
+            <td>
+              {{knn.precision[2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              Recall
+            </td>
+            <td>
+              {{knn.recall[0]}}
+            </td>
+            <td>
+              {{knn.recall[1]}}
+            </td>
+            <td>
+              {{knn.recall[2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              F-Measure
+            </td>
+            <td>
+              {{knn.f_measure[0]}}
+            </td>
+            <td>
+              {{knn.f_measure[1]}}
+            </td>
+            <td>
+              {{knn.f_measure[2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              Accuracy
+            </td>
+            <td colspan="3">
+              {{knn.accuracy}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              Standard Deviation
+            </td>
+            <td colspan="3">
+              {{knn.std}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sectionContainer animated fadeIn" style="margin: auto; color:green !important; width:100%; margin-bottom: 20px;">
+      <div class="sectionHeader">Simple Logistic</div>
+      <div class="sectionBody">
+        <table mdbTable #tableEl="mdbTable" hover="true" class="table z-depth-0" style="text-align: center">
+          <tbody #row>
+          <tr style="font-weight: bold">
+            <th>
+            </th>
+            <th>
+              a
+            </th>
+            <th>
+              b
+            </th>
+            <th>
+              c
+            </th>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              a = -1
+            </td>
+            <td>
+              {{logistic.confusion_matrix[0][0]}}
+            </td>
+            <td>
+              {{logistic.confusion_matrix[0][1]}}
+            </td>
+            <td>
+              {{logistic.confusion_matrix[0][2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              b = 0
+            </td>
+            <td>
+              {{logistic.confusion_matrix[1][0]}}
+            </td>
+            <td>
+              {{logistic.confusion_matrix[1][1]}}
+            </td>
+            <td>
+              {{logistic.confusion_matrix[1][2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              c = 1
+            </td>
+            <td>
+              {{logistic.confusion_matrix[2][0]}}
+            </td>
+            <td>
+              {{logistic.confusion_matrix[2][1]}}
+            </td>
+            <td>
+              {{logistic.confusion_matrix[2][2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              Precision
+            </td>
+            <td>
+              {{logistic.precision[0]}}
+            </td>
+            <td>
+              {{logistic.precision[1]}}
+            </td>
+            <td>
+              {{logistic.precision[2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              Recall
+            </td>
+            <td>
+              {{logistic.recall[0]}}
+            </td>
+            <td>
+              {{logistic.recall[1]}}
+            </td>
+            <td>
+              {{logistic.recall[2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              F-Measure
+            </td>
+            <td>
+              {{logistic.f_measure[0]}}
+            </td>
+            <td>
+              {{logistic.f_measure[1]}}
+            </td>
+            <td>
+              {{logistic.f_measure[2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              Accuracy
+            </td>
+            <td colspan="3">
+              {{logistic.accuracy}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              Standard Deviation
+            </td>
+            <td colspan="3">
+              {{logistic.std}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="sectionContainer animated fadeIn" style="margin: auto; color:green !important; width:100%; margin-bottom: 20px;">
+      <div class="sectionHeader">SVM</div>
+      <div class="sectionBody">
+        <table mdbTable #tableEl="mdbTable" hover="true" class="table z-depth-0" style="text-align: center">
+          <tbody #row>
+          <tr style="font-weight: bold">
+            <th >
+            </th>
+            <th>
+              a
+            </th>
+            <th>
+              b
+            </th>
+            <th>
+              c
+            </th>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              a = -1
+            </td>
+            <td>
+              {{svm.confusion_matrix[0][0]}}
+            </td>
+            <td>
+              {{svm.confusion_matrix[0][1]}}
+            </td>
+            <td>
+              {{svm.confusion_matrix[0][2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              b = 0
+            </td>
+            <td>
+              {{svm.confusion_matrix[1][0]}}
+            </td>
+            <td>
+              {{svm.confusion_matrix[1][1]}}
+            </td>
+            <td>
+              {{svm.confusion_matrix[1][2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              c = 1
+            </td>
+            <td>
+              {{svm.confusion_matrix[2][0]}}
+            </td>
+            <td>
+              {{svm.confusion_matrix[2][1]}}
+            </td>
+            <td>
+              {{svm.confusion_matrix[2][2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              Precision
+            </td>
+            <td>
+              {{svm.precision[0]}}
+            </td>
+            <td>
+              {{svm.precision[1]}}
+            </td>
+            <td>
+              {{svm.precision[2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              Recall
+            </td>
+            <td>
+              {{svm.recall[0]}}
+            </td>
+            <td>
+              {{svm.recall[1]}}
+            </td>
+            <td>
+              {{svm.recall[2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              F-Measure
+            </td>
+            <td>
+              {{svm.f_measure[0]}}
+            </td>
+            <td>
+              {{svm.f_measure[1]}}
+            </td>
+            <td>
+              {{svm.f_measure[2]}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              Accuracy
+            </td>
+            <td colspan="3">
+              {{svm.accuracy}}
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; text-align: left">
+              Standard Deviation
+            </td>
+            <td colspan="3">
+              {{svm.std}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 
 </div>
