@@ -1,8 +1,9 @@
 *{
-  font-family: 'Varela Round', sans-serif;
+  font-family: "Varela Round", sans-serif !important;
 }
 
 .content{
-  padding:50px
+  padding:50px;
+  padding-top: 10px;
 }
 

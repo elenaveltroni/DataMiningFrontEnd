@@ -9,7 +9,9 @@ import {$} from 'protractor';
 })
 export class ClusterComponent implements OnInit {
 
-  threshold: number = 1000;
+  threshold: number = 100;
+  affinity: string = 'euclidean';
+  linkage: string = 'single';
   view_image = false;
   image: string;
   sentences = [];
@@ -22,11 +24,13 @@ export class ClusterComponent implements OnInit {
   }
 
   visualize(){
-    this.view_image = true;
+    this.view_image = false
+    this.img_url = '';
     this.loading = true;
-    this.service.cluster(this.threshold).then((res: any) => {
+    this.service.cluster(this.threshold, this.affinity, this.linkage).then((res: any) => {
       if (res) {
         console.log(res);
+        this.view_image = true;
         this.img_url = "data:image/png;base64,"+ res.image;
         this.sentences = res.result;
         this.loading = false;

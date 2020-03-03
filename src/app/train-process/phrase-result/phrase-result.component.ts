@@ -35,6 +35,11 @@ export class PhraseResultComponent implements OnInit {
     this.service.insertSentence('text', this.senteces, this.document_id).then((res: any) => {
       if(res) {
         console.log(res);
+        this.service.train().then((res: any) => {
+          if(res) {
+            console.log(res);
+          }
+        });
       }
     });
   }

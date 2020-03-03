@@ -1,10 +1,9 @@
-<div class="toolbar">
+<!--<div class="toolbar">-->
   <!--Navbar-->
-  <mdb-navbar SideClass="navnbar navbar-1 navbar-light info-color lighten-2" [containerInside]="false" style="color: white; border:none; padding-bottom:10px" #navbar>
+  <!--<mdb-navbar SideClass="navnbar navbar-1 navbar-light info-color lighten-2" [containerInside]="false" style="color: white; border:none; padding-bottom:10px" #navbar>-->
 
     <!-- Collapsible content -->
-    <links>
-      <!-- Links -->
+    <!--<links>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link waves-light" [class.active]="component == 'home'" mdbWavesEffect (click)="this.navbar.hide(); component = 'home'">Home</a>
@@ -29,7 +28,19 @@
     </links>
 
   </mdb-navbar>
+</div>-->
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <a class="nav-link waves-light" [class.active]="component == 'home'" mdbWavesEffect (click)="closeNav(); component = 'home'">Home</a>
+  <a class="nav-link waves-light" [class.active]="component == 'analytics'" mdbWavesEffect (click)="closeNav(); component = 'analytics'">Analytics</a>
+  <a class="nav-link waves-light" [class.active]="component == 'cluster'" mdbWavesEffect (click)="closeNav(); component = 'cluster';">Clustering</a>
+  <a class="nav-link waves-light" [class.active]="component == 'create-acquisition'" mdbWavesEffect (click)="closeNav(); component = 'create-acquisition';">Create Acquisition</a>
+  <a class="nav-link waves-light" [class.active]="component == 'keyword'" mdbWavesEffect (click)="closeNav(); component = 'keyword'">Add/Remove keyword</a>
+  <a class="nav-link waves-light" [class.active]="component == 'train-process'" mdbWavesEffect (click)="closeNav(); component = 'train-process'">Run train process</a>
 </div>
+
+<div style="margin: 15px;font-size:30px; cursor:pointer" (click)="openNav()">&#9776;</div>
 
 <div class="content">
   <app-text-analysis *ngIf="component == 'home'"></app-text-analysis>

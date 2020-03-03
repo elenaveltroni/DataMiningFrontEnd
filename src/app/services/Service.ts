@@ -11,7 +11,7 @@ import {Keyword} from '../entities/Keyword';
 })
 
 export class Service {
-  serverURL = "http://78.46.192.21";
+  serverURL = "http://6d0d9b62.ngrok.io"; //"http://78.46.192.21:8080";
 
   constructor(private http: HttpClient) {
   }
@@ -242,16 +242,30 @@ export class Service {
   TRAIN
    */
   train(){
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+
+    return new Promise(resolve => {
+      this.http.post(this.serverURL+"/train", {
+        headers
+      }).subscribe((data: any) => {
+        resolve(data);
+      });
+    });
   }
 
   /*
   CLUSTER
    */
-  cluster(threshold: number){
+  cluster(threshold: number, affinity: string, linkage: string){
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
 
-    let b = {"threshold": threshold};
+    let b = {
+      "threshold": threshold,
+      "affinity": affinity,
+      "linkage": linkage
+    };
     let body = JSON.stringify(b);
 
     return new Promise(resolve => {

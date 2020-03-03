@@ -87,6 +87,7 @@ export class TextAnalysisComponent implements OnInit {
 
   viewTwitter(view: boolean){
     this.view_result = view;
+    this.error = false;
   }
 
 }

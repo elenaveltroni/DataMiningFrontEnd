@@ -22,5 +22,11 @@ export class HomeComponent implements OnInit {
     this.component = 'home';
   }
 
+  openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
 
+  closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
 }

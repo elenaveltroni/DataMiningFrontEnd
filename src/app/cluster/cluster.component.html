@@ -1,22 +1,38 @@
 <div>
-  <button *ngIf="view_image" class="backBtn" (click)="back()">
+  <!--<button *ngIf="view_image" class="backBtn" (click)="back()">
     <mdb-icon fas icon="chevron-left"></mdb-icon> Indietro
-  </button>
+  </button>-->
   <h3 style="width:100%">Clustering</h3>
-  <div class="md-form" *ngIf="!view_image">
-    <input type="text" id="splitCharacter" class="form-control" [(ngModel)]="threshold" mdbInput>
-    <label for="splitCharacter">Enter the threshold</label>
+  <div class="md-form" style="margin-bottom: 0px">
+    <input type="text" id="threshold" class="form-control" [(ngModel)]="threshold" mdbInput>
+    <label for="threshold">Enter the threshold</label>
+  </div>
+  <div class="md-form" style="margin-bottom: 0px; margin-top: 0px">
+    <label>Enter the affinity</label><br><br>
+    <select class="browser-default custom-select" [(ngModel)]="affinity" style="margin-bottom: 15px;">
+      <option value="euclidean">Euclidean</option>
+      <option value="manhattan">Manhattan</option>
+      <option value="cosine">Cosine</option>
+    </select>
+  </div>
+  <div class="md-form" style="margin-bottom: 0px; margin-top: 0px">
+    <label>Enter the linkage</label><br><br>
+    <select class="browser-default custom-select" [(ngModel)]="linkage" style="margin-bottom: 15px;">
+      <option value="single">Single Link</option>
+      <option value="complete">Complete Link</option>
+      <option value="average">Average</option>
+    </select>
   </div>
 
   <div>
-    <div style="float:right" *ngIf="!view_image">
+    <div style="float:right">
       <button type="button" mdbBtn color="info" mdbWavesEffect (click)="visualize()">Visualize dendogram</button>
     </div>
   </div>
 
-  <div *ngIf="view_image">
-    <div *ngIf="loading" style="width: 100%; text-align: center; margin-top: 30px;">Loading..</div>
-    <div style="width: 100%;text-align: center">
+  <div>
+    <div *ngIf="loading" style="width: 100%; text-align: center; margin-top: 60px;">Loading..</div>
+    <div *ngIf="view_image" style="width: 100%;text-align: center; margin-top: 60px ">
       <img src="{{img_url}}" id="img" style="width: 80%;">
     </div>
 
