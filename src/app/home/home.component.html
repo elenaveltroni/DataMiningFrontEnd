@@ -32,10 +32,10 @@
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-  <a class="nav-link waves-light" [class.active]="component == 'home'" mdbWavesEffect (click)="closeNav(); component = 'home'">Home</a>
-  <a class="nav-link waves-light" [class.active]="component == 'analytics'" mdbWavesEffect (click)="closeNav(); component = 'analytics'">Analytics</a>
+  <a class="nav-link waves-light" [class.active]="component == 'home'" mdbWavesEffect (click)="closeNav(); component = 'home'">Sentiment prediction</a>
   <a class="nav-link waves-light" [class.active]="component == 'cluster'" mdbWavesEffect (click)="closeNav(); component = 'cluster';">Clustering</a>
-  <a class="nav-link waves-light" [class.active]="component == 'create-acquisition'" mdbWavesEffect (click)="closeNav(); component = 'create-acquisition';">Create Acquisition</a>
+  <a class="nav-link waves-light" [class.active]="component == 'analytics'" mdbWavesEffect (click)="closeNav(); component = 'analytics'">Analytics</a>
+  <!--<a class="nav-link waves-light" [class.active]="component == 'create-acquisition'" mdbWavesEffect (click)="closeNav(); component = 'create-acquisition';">Create Acquisition</a>-->
   <a class="nav-link waves-light" [class.active]="component == 'keyword'" mdbWavesEffect (click)="closeNav(); component = 'keyword'">Add/Remove keyword</a>
   <a class="nav-link waves-light" [class.active]="component == 'train-process'" mdbWavesEffect (click)="closeNav(); component = 'train-process'">Run train process</a>
 </div>

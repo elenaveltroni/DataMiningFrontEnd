@@ -1,3 +1,11 @@
+<div class="alert alert-success" *ngIf="success">
+  <strong>Success!</strong> The insertion was successful.
+</div>
+
+<div class="alert alert-danger" *ngIf="danger">
+  <strong>Warning!</strong> A problem occurred, please try again.
+</div>
+
 <div>
   <h3>Analytics</h3>
 
@@ -16,8 +24,12 @@
     </div>
   </div>
 
-  <div *ngFor="let a of acquisitions" class="sectionContainer animated fadeIn">
-    <div class="sectionHeader">{{a.acquiror.name}} - {{a.target.name}}</div>
+  <div class="sectionContainer animated fadeIn">
+    <div class="sectionHeader" style="color: #0099CC">Create new Acquisition <div class="circle" (click)="acquisitionModal.show()">+</div></div>
+  </div>
+
+    <div *ngFor="let a of acquisitions" class="sectionContainer animated fadeIn">
+    <div class="sectionHeader">{{a.acquiror.name}} - {{a.target.name}} <div class="circle" (click)="selected_acquisition = a._id.$oid; documentModal.show(); getAcqTitle(a._id.$oid)">+</div></div>
     <div class="sectionBody">
       <div style="width:100%; margin-top: 10px" *ngIf="a.documents.length == 0">
         No documents
@@ -51,3 +63,104 @@
   </div>
 
 </div>
+
+<div mdbModal #documentModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="documentModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="modalDocLabel">Create new document</h4>
+      </div>
+      <div class="modal-body">
+        <div class="md-form" style="margin-bottom: -0.5rem; margin-top: 0;">
+          <label>Acquisition: {{acquisitionTitle}}</label><br><br>
+        </div>
+        <div class="md-form">
+          <input type="text" id="documentTitle" class="form-control" [(ngModel)]="docTitle" mdbInput>
+          <label for="documentTitle">Title</label>
+        </div>
+        <div class="md-form">
+          <input type="text" id="documentLink" class="form-control" [(ngModel)]="docLink" mdbInput>
+          <label for="documentLink">Link</label>
+        </div>
+        <div class="md-form">
+          <input type="text" id="documentSource" class="form-control" [(ngModel)]="docSource" mdbInput>
+          <label for="documentSource">Source</label>
+        </div>
+        <div class="md-form">
+          <input type="date" id="date" class="form-control" [(ngModel)]="docDate" mdbInput>
+          <label for="date">Date</label>
+        </div>
+        <div class="md-form">
+          <input type="text" id="documentType" class="form-control" [(ngModel)]="docType" mdbInput>
+          <label for="documentType">Type</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="light" class="waves-light" aria-label="Close" (click)="documentModal.hide()" mdbWavesEffect>Close</button>
+        <button type="button" mdbBtn color="info" class="relative waves-light" mdbWavesEffect (click)="saveDocument(); documentModal.hide()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="overflow-y: auto" mdbModal #acquisitionModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="acquisitionModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="modalAcqLabel">Create new acquisition</h4>
+      </div>
+      <div class="modal-body">
+        <div class="md-form" style="margin-top: 0;">
+          <input type="text" id="acquirorName" class="form-control" [(ngModel)]="acquirorName" mdbInput>
+          <label for="acquirorName">Acquiror Name</label>
+        </div>
+        <div class="md-form">
+          <input type="text" id="acquirorTicker" class="form-control" [(ngModel)]="acquirorTicker" mdbInput>
+          <label for="acquirorTicker">Acquiror Ticker</label>
+        </div>
+        <div class="md-form">
+          <input type="text" id="acquirorState" class="form-control" [(ngModel)]="acquirorState" mdbInput>
+          <label for="acquirorState">Acquiror State</label>
+        </div>
+        <div class="md-form">
+          <input type="text" id="targetName" class="form-control" [(ngModel)]="targetName" mdbInput>
+          <label for="targetName">Target Name</label>
+        </div>
+        <div class="md-form">
+          <input type="text" id="targetTicker" class="form-control" [(ngModel)]="targetTicker" mdbInput>
+          <label for="targetTicker">Target Ticker</label>
+        </div>
+        <div class="md-form">
+          <input type="text" id="targetState" class="form-control" [(ngModel)]="targetState" mdbInput>
+          <label for="targetState">Target State</label>
+        </div>
+        <div class="md-form">
+          <input type="date" id="announcementDate" class="form-control" [(ngModel)]="announcementDate" mdbInput>
+          <label for="announcementDate">Announcement Date</label>
+        </div>
+        <div class="md-form" style="margin-top:-1rem">
+          <label>Status of the operation</label><br><br>
+          <select class="browser-default custom-select" [(ngModel)]="status">
+            <option value="IN_PROGRESS">In progress</option>
+            <option value="COMPLETE">Complete</option>
+          </select>
+        </div>
+        <div class="md-form" *ngIf="status == 'COMPLETE'">
+          <input type="date" id="signinDate" class="form-control" [(ngModel)]="signinDate" mdbInput>
+          <label for="signinDate">End Date</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="light" class="waves-light" aria-label="Close" (click)="acquisitionModal.hide()" mdbWavesEffect>Close</button>
+        <button type="button" mdbBtn color="info" class="relative waves-light" mdbWavesEffect (click)="saveAcquisition(); acquisitionModal.hide()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+

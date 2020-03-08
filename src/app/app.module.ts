@@ -7,7 +7,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import {AppRoutingModule} from './app-routing.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CreateAcquisitionComponent } from './create-acquisition/create-acquisition.component';
 import { TextAnalysisComponent } from './text-analysis/text-analysis.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
@@ -42,6 +42,7 @@ import { ClusterComponent } from './cluster/cluster.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [
     Service,

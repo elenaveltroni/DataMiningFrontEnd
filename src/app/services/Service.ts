@@ -39,7 +39,7 @@ export class Service {
     let params = id;
 
     return new Promise(resolve => {
-      this.http.get(this.serverURL+"/acquisition"+params,{
+      this.http.get(this.serverURL+"/acquisition/"+params,{
         headers
       }).subscribe((data: any) => {
         resolve(data);

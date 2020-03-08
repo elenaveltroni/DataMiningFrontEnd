@@ -98,8 +98,8 @@ export class CreateAcquisitionComponent implements OnInit {
     this.document.date = this.documentDate;
     this.document.type = this.documentType;
     this.document.acquisition_id = this.selected_acquisition;
-
-    this.service.insertDocument(this.document).then(data => {
+    console.log(this.document);
+    /*this.service.insertDocument(this.document).then(data => {
       if (data) {
         this.success = true;
         this.accordion2 = false;
@@ -108,7 +108,7 @@ export class CreateAcquisitionComponent implements OnInit {
       }
     }).catch( error => {
       this.danger = true;
-    });
+    });*/
   }
 
   allFormAcquisitionFilled() {

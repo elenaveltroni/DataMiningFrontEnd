@@ -8,12 +8,14 @@
 <div style="width:100%; display: inline-flex">
   <h3 style="width:100%">Keyword list</h3>
 
-  <button *ngIf="!addKeyword" style="float:right" (click)="addKeyword = !addKeyword; insertError = false; insertSuccess = false" type="button" mdbBtn color="info" outline="true" rounded="true" size="sm" class="px-2" mdbWavesEffect>
-    <mdb-icon fas icon="plus" class="mt-0"></mdb-icon>
+  <button *ngIf="!addKeyword" style="float:right;width: 38px;font-size: 15px;font-weight: bold;" (click)="addKeyword = !addKeyword; insertError = false; insertSuccess = false" type="button" mdbBtn color="info" outline="true" rounded="true" size="sm" class="px-2" mdbWavesEffect>
+    <!--<mdb-icon fas icon="plus" class="mt-0"></mdb-icon>-->
+    +
   </button>
 
-  <button *ngIf="addKeyword" style="float:right" (click)="addKeyword = !addKeyword; insertError = false; insertSuccess = false" type="button" mdbBtn color="info" outline="true" rounded="true" size="sm" class="px-2" mdbWavesEffect>
-    <mdb-icon fas icon="minus" class="mt-0"></mdb-icon>
+  <button *ngIf="addKeyword" style="float:right;width: 38px;font-size: 15px;font-weight: bold;" (click)="addKeyword = !addKeyword; insertError = false; insertSuccess = false" type="button" mdbBtn color="info" outline="true" rounded="true" size="sm" class="px-2" mdbWavesEffect>
+    <!--<mdb-icon fas icon="minus" class="mt-0"></mdb-icon>-->
+    -
   </button>
 </div>
 
@@ -49,7 +51,7 @@
           </td>
           <td style="text-align: left;">
             <button style="width: 31px;" type="button" mdbBtn color="danger" outline="true" rounded="true" size="sm" class="px-2" mdbWavesEffect (click)="deleteKeyword(key.value); insertError = false; insertSuccess = false">
-              <mdb-icon fas icon="times" class="mt-0"></mdb-icon>
+              <!--<mdb-icon fas icon="times" class="mt-0"></mdb-icon>--> x
             </button>
           </td>
         </tr>
