@@ -37,7 +37,7 @@ export class PhraseResultComponent implements OnInit {
     for(let i = 0; i < this.array_split.length; i++){
       this.senteces.push({
         'text': this.array_split[i],
-        'class': ''//document.getElementById("sentiment_"+i).value
+        'class': document.getElementById("sentiment_"+i).value
       })
     }
     this.service.insertSentence('text', this.senteces, this.document_id).then((res: any) => {

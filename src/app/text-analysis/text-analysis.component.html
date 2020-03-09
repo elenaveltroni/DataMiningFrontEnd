@@ -17,7 +17,7 @@
     <div *ngIf="tab == 1" style="margin-top:20px;">
       <label>Select a document</label><br>
       <select class="browser-default custom-select" [(ngModel)]="document" style="margin-bottom: 15px;">
-          <option *ngFor="let doc of documents" value="{{doc._id}}">{{doc.source}} - {{doc.type}}</option>
+          <option *ngFor="let doc of documents" value="{{doc._id.$oid}}">{{doc.source}} - {{doc.type}}</option>
           <option *ngIf="documents.length == 0" value="undefined">No document</option>
       </select>
       <textarea type="text" rows="10" id="formText" class="md-textarea form-control" mdbInput placeholder="Enter the text to analyze" [(ngModel)]="text"></textarea>
@@ -31,8 +31,8 @@
         <label>Select a classifier</label><br>
         <select class="browser-default custom-select" [(ngModel)]="train" style="margin-bottom: 15px;">
           <option value="svm">SVM</option>
-          <option value="1">Simple Logistic</option>
-          <option value="2">K-NN</option>
+          <option value="logistic">Simple Logistic</option>
+          <option value="knn">K-NN</option>
         </select>
       </div>
       <div>
@@ -52,6 +52,14 @@
         <input type="date" id="end_date" class="form-control" [(ngModel)]="end_date" mdbInput>
         <label for="end_date">Choose your end date</label>
       </div>
+      <div>
+        <label>Select a classifier</label><br>
+        <select class="browser-default custom-select" [(ngModel)]="train" style="margin-bottom: 15px;">
+          <option value="svm">SVM</option>
+          <option value="logistic">Simple Logistic</option>
+          <option value="knn">K-NN</option>
+        </select>
+      </div>
       <div style="float:right">
         <button type="button" mdbBtn color="info" mdbWavesEffect (click)="searchTwitter()">Run</button>
       </div>
@@ -59,4 +67,4 @@
   </div>
 </span>
 
-<app-result *ngIf="view_result" [array] ="array_split" [model]="train" [username]="username" [since]="start_date" [until]="end_date" (view_result)="viewTwitter($event)" ></app-result>
+<app-result *ngIf="view_result" [document_id]="document" [array] ="array_split" [model]="train" [username]="username" [since]="start_date" [until]="end_date" (view_result)="viewTwitter($event)" ></app-result>

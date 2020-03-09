@@ -3,6 +3,7 @@ import {Service} from '../services/Service';
 import {Acquisition} from '../entities/Acquisition';
 import {Document} from '../entities/Document';
 import {Router} from '@angular/router';
+import {Keyword} from '../entities/Keyword';
 
 @Component({
   selector: 'app-text-analysis',
@@ -14,7 +15,7 @@ export class TextAnalysisComponent implements OnInit {
   text: string = '';
   splitCharacter: string = undefined;
   username:string = undefined;
-  document: any = undefined;
+  document: Document = undefined;
   documents: Document[] = [];
   end_date: any;
   start_date:any;
@@ -26,12 +27,27 @@ export class TextAnalysisComponent implements OnInit {
 
   acquisitions: Acquisition[] = [];
 
+  keywordList : Keyword[] = [];
+
   constructor(private service: Service, private router: Router) {
     this.getDocument();
   }
 
   ngOnInit() {
     this.changeTabParam(1);
+    this.getKeyword();
+  }
+
+  getKeyword() {
+    this.service.getAllKeyword().then((data: any) => {
+      if (data) {
+        this.keywordList = data;
+      } else {
+        console.log("ERRORE");
+      }
+    }, err => {
+      console.log(err.message);
+    });
   }
 
   changeTabParam(tab: number) {
@@ -42,13 +58,16 @@ export class TextAnalysisComponent implements OnInit {
     this.view_result = true;
     if (this.document == undefined || this.text == '')
       this.error = true;
-
+    console.log(this.document);
     if(this.splitCharacter == undefined) {
       this.array_split = this.text.split(".");
     }
     else{
       this.array_split = this.text.split(this.splitCharacter);
     }
+    let array_string = [];
+    array_string = this.array_split.filter(i => Math.max(...this.keywordList.map(k=> i.indexOf(k.value))) > 0);
+    this.array_split = array_string;
   }
 
   searchTwitter(){

@@ -10,7 +10,8 @@ import {Service} from '../services/Service';
 })
 export class AnalyticsComponent implements OnInit {
 
-  success = false;
+  success_a = false;
+  success_d = false;
   danger = false;
 
   acquisitions: Acquisition[] = [];
@@ -41,7 +42,7 @@ export class AnalyticsComponent implements OnInit {
   targetTicker: string;
   targetState: string;
   announcementDate: string;
-  signinDate: string = "";
+  signinDate: string = undefined;
 
 
   constructor(public service: Service) { }
@@ -97,7 +98,7 @@ export class AnalyticsComponent implements OnInit {
 
     this.service.insertDocument(this.newDocument).then(data => {
       if (data) {
-        this.success = true;
+        this.success_d = true;
         this.acquisitions = [];
         this.getTextList();
       } else {
@@ -117,14 +118,17 @@ export class AnalyticsComponent implements OnInit {
     this.target.state = this.targetState;
     this.target.ticker = this.targetTicker;
     this.newAcquisition.target = this.target;
-    this.newAcquisition.annuncement_date = this.announcementDate;
+    this.newAcquisition.annuncement_date = new Date(this.announcementDate);
     this.newAcquisition.status = this.status;
     this.newAcquisition.documents = [];
-    this.newAcquisition.signing_date = new Date(this.signinDate);
+    if(this.signinDate == undefined)
+      this.newAcquisition.signing_date = new Date(this.announcementDate);
+    else
+      this.newAcquisition.signing_date = new Date(this.signinDate);
 
     this.service.insertAcquisition(this.newAcquisition).then(data => {
       if (data) {
-        this.success = true;
+        this.success_a = true;
         this.acquisitions = [];
         this.getTextList();
       } else {

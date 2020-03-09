@@ -1,7 +1,9 @@
-<div class="alert alert-success" *ngIf="success">
-  <strong>Success!</strong> The insertion was successful.
+<div class="alert alert-success" *ngIf="success_d">
+  <strong>Success!</strong> The new document has been inserted correctly.
 </div>
-
+<div class="alert alert-success" *ngIf="success_a">
+  <strong>Success!</strong> The new acquisition document has been inserted correctly.
+</div>
 <div class="alert alert-danger" *ngIf="danger">
   <strong>Warning!</strong> A problem occurred, please try again.
 </div>
@@ -25,7 +27,7 @@
   </div>
 
   <div class="sectionContainer animated fadeIn">
-    <div class="sectionHeader" style="color: #0099CC">Create new Acquisition <div class="circle" (click)="acquisitionModal.show()">+</div></div>
+    <div class="sectionHeader" style="color: #0099CC">Create new acquisition <div class="circle" (click)="acquisitionModal.show()">+</div></div>
   </div>
 
     <div *ngFor="let a of acquisitions" class="sectionContainer animated fadeIn">

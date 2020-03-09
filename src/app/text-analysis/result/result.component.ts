@@ -9,6 +9,7 @@ import {Service} from '../../services/Service';
 })
 export class ResultComponent implements OnInit {
 
+  @Input() document_id: string;
   @Input() array? = [];
   @Input() username?: string;
   @Input() since?: string;
@@ -20,9 +21,16 @@ export class ResultComponent implements OnInit {
   tweets_obj = {
     tweets: []
   };
-  list = [];
+  list_result = [];
+  list_twitter = [];
   twitter = false;
   text = false;
+
+  result: boolean = false;
+  knn = {};
+  logistic = {};
+  svm = {};
+
 
   constructor(private router: Router, private route: ActivatedRoute, private service: Service) {
 
@@ -35,7 +43,12 @@ export class ResultComponent implements OnInit {
         if (res) {
           this.tweets_obj = res;
           console.log(this.tweets_obj.tweets);
-          this.list = this.tweets_obj.tweets;
+          this.list_result = this.tweets_obj.tweets;
+          this.service.predict(this.model, this.list_result).then((res: any) => {
+            if (res) {
+              this.list_result = res;
+            }
+          })
         }
       })
     }
@@ -43,15 +56,51 @@ export class ResultComponent implements OnInit {
       this.text = true;
       this.service.predict(this.model, this.array).then((res: any) => {
         if (res) {
-          this.list = res;
+          this.list_result = res;
         }
       })
     }
-    console.log(this.list);
+    console.log(this.list_result);
   }
 
   back(){
-    console.log('back');
-    this.view_result.emit(false);
+    if(this.result)
+      this.result = false;
+    else{
+      this.view_result.emit(false);
+    }
+  }
+
+  addTraining(){
+    if(this.text) {
+      this.service.insertSentence('analyst', this.array, this.document_id).then((res: any) => {
+        if (res) {
+          console.log(res);
+          this.result = true;
+          this.service.train().then((data: any) => {
+            if (data) {
+              this.knn = data.knn;
+              this.svm = data.svm;
+              this.logistic = data.logistic;
+            }
+          });
+        }
+      });
+    }
+    else{
+      this.service.insertSentence('twitter', this.array, this.document_id).then((res: any) => {
+        if (res) {
+          console.log(res);
+          this.result = true;
+          this.service.train().then((data: any) => {
+            if (data) {
+              this.knn = data.knn;
+              this.svm = data.svm;
+              this.logistic = data.logistic;
+            }
+          });
+        }
+      });
+    }
   }
 }
