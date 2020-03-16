@@ -40,6 +40,9 @@
       <table mdbTable #tableEl="mdbTable" hover="true" class="table z-depth-0">
         <tbody #row>
         <tr *ngFor="let s of sentences; let i = index">
+          <td>
+            {{i}}
+          </td>
           <td style="width:88%">
             {{s.text}}
           </td>
