@@ -30,6 +30,12 @@ export class ResultComponent implements OnInit {
   knn = {};
   logistic = {};
   svm = {};
+  positive: boolean = false;
+  negative: boolean = false;
+  neutral: boolean = false;
+  totalP: number = 0;
+  totalNeg: number = 0;
+  totalN: number = 0;
 
 
   constructor(private router: Router, private route: ActivatedRoute, private service: Service) {
@@ -47,6 +53,8 @@ export class ResultComponent implements OnInit {
           this.service.predict(this.model, this.list_result).then((res: any) => {
             if (res) {
               this.list_result = res;
+              this.maxSentiment();
+              console.log(this.list_result);
             }
           })
         }
@@ -57,10 +65,11 @@ export class ResultComponent implements OnInit {
       this.service.predict(this.model, this.array).then((res: any) => {
         if (res) {
           this.list_result = res;
+          this.maxSentiment();
+          console.log(this.list_result);
         }
       })
     }
-    console.log(this.list_result);
   }
 
   back(){
@@ -103,4 +112,23 @@ export class ResultComponent implements OnInit {
       });
     }
   }
+
+  maxSentiment(){
+    for(let i = 0; i < this.list_result.length; i++){
+      console.log(this.list_result[i].prediction);
+      if(this.list_result[i].prediction == 1)
+        this.totalP++;
+      else if(this.list_result[i].prediction == 0)
+        this.totalN++;
+      else
+        this.totalNeg++
+    }
+    if(this.totalP >= this.totalN && this.totalP >= this.totalNeg)
+      this.positive = true;
+    else if(this.totalN >= this.totalP && this.totalN >= this.totalNeg)
+      this.neutral = true;
+    else
+      this.negative = true;
+  }
+
 }

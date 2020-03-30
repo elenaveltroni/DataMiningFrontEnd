@@ -50,6 +50,21 @@
       </span>
     </div>
 
+    <div style="display: inline-flex; width: 100%; margin-bottom: 20px; margin-top:20px; text-align: center;">
+      <div *ngIf="positive" class="sectionContainer animated fadeIn" style="margin: auto; color:green !important; width:90%">
+        <div class="sectionHeader" style="color:green !important;">{{totalP}}</div>
+        <div class="sectionBody">Total positive phrases</div>
+      </div>
+      <div *ngIf="neutral" class="sectionContainer animated fadeIn"style="margin: auto; width:90%">
+        <div class="sectionHeader">{{totalN}}</div>
+        <div class="sectionBody">Total neutral phrases</div>
+      </div>
+      <div *ngIf="negative" class="sectionContainer animated fadeIn" style="margin: auto; color:red !important; width:90%">
+        <div class="sectionHeader" style="color:red !important;">{{totalNeg}}</div>
+        <div class="sectionBody">Total negative phrases</div>
+      </div>
+    </div>
+
     <div style="float:right">
       <button type="button" mdbBtn color="info" mdbWavesEffect (click)="addTraining()">Save result</button>
     </div>
