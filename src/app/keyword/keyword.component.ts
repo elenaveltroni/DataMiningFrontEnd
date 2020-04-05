@@ -41,11 +41,14 @@ export class KeywordComponent implements OnInit {
 
   deleteKeyword(key){
     let array: Keyword[] = [];
+    console.log(key);
     this.keywordList.forEach(keyword => {
       if(keyword.value != key)
         array.push(keyword);
     });
     this.keywordList = array;
+    this.keywordList = this.keywordList.map(o => {delete o['_id']; return o; } );
+    console.log(array);
     this.inserKeyword();
   }
 
@@ -66,10 +69,13 @@ export class KeywordComponent implements OnInit {
   addNewKeyword(){
     this.key.value = this.newKeyword;
     this.key.type = 'web';
-    this.key._id = {};
+    //this.key._id = {};
     this.keywordList.push(this.key);
+    this.keywordList = this.keywordList.map(o => {delete o['_id']; return o; } );
+    console.log(this.keywordList);
     this.inserKeyword();
     this.addKeyword = false;
+    this.newKeyword = '';
   }
 
 }
