@@ -47,10 +47,10 @@ export class KeywordComponent implements OnInit {
     });
     this.keywordList = array;
     this.keywordList = this.keywordList.map(o => {delete o['_id']; return o; } );
-    this.inserKeyword();
+    this.insertKeyword();
   }
 
-  inserKeyword(){
+  insertKeyword(){
     this.service.insertKeyword(this.keywordList).then((res: any) => {
       if (res) {
         console.log(res);
@@ -69,7 +69,7 @@ export class KeywordComponent implements OnInit {
     this.key.type = 'web';
     this.keywordList.push(this.key);
     this.keywordList = this.keywordList.map(o => {delete o['_id']; return o; } );
-    this.inserKeyword();
+    this.insertKeyword();
     this.addKeyword = false;
     this.newKeyword = '';
   }
